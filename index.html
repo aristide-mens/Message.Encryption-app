@@ -378,6 +378,21 @@
             z-index: 0;
         }
         
+        .password-strength {
+            height: 6px;
+            border-radius: 3px;
+            margin-top: 10px;
+            background: var(--border);
+            overflow: hidden;
+        }
+        
+        .password-strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            background: linear-gradient(90deg, var(--error), var(--warning), var(--success));
+        }
+        
         @media (max-width: 768px) {
             .buttons {
                 flex-direction: column;
@@ -439,12 +454,18 @@
             <div class="card">
                 <label for="password" id="passwordLabel">Mot de passe secret</label>
                 <input type="password" id="password" placeholder="Entrez votre mot de passe ici" autocomplete="off">
+                <div class="password-strength">
+                    <div class="password-strength-fill" id="passwordStrength"></div>
+                </div>
+                <div id="passwordHint" style="margin-top: 10px; font-size: 0.9rem; color: #a0a0ff;">
+                    Utilisez un mot de passe avec des lettres pour une sécurité optimale
+                </div>
             </div>
             
             <button id="continueBtn" class="btn btn-block">Continuer vers le cryptage</button>
             
             <div class="app-info">
-                <span id="appInfo">Application de cryptage par congruence - Version 1.0</span>
+                <span id="appInfo">Application de cryptage par congruence - Version 2.0</span>
             </div>
         </div>
         
@@ -489,7 +510,7 @@
                 passwordLabel: "Mot de passe secret",
                 passwordPlaceholder: "Entrez votre mot de passe ici",
                 continueBtn: "Continuer vers le cryptage",
-                appInfo: "Application de cryptage par congruence - Version 1.0",
+                appInfo: "Application de cryptage par congruence - Version 2.0",
                 messageLabel: "Message à crypter/décrypter",
                 messagePlaceholder: "Entrez votre message ici",
                 resultLabel: "Résultat",
@@ -502,6 +523,7 @@
                 statusDecoded: "Message décrypté avec succès!",
                 statusPasswordRequired: "Veuillez entrer un mot de passe",
                 statusMessageRequired: "Veuillez entrer un message",
+                passwordHint: "Utilisez un mot de passe avec des lettres pour une sécurité optimale"
             },
             en: {
                 modalTitle: "How to use this software",
@@ -510,7 +532,7 @@
                 passwordLabel: "Secret password",
                 passwordPlaceholder: "Enter your password here",
                 continueBtn: "Continue to encryption",
-                appInfo: "Congruence encryption application - Version 1.0",
+                appInfo: "Congruence encryption application - Version 2.0",
                 messageLabel: "Message to encrypt/decrypt",
                 messagePlaceholder: "Enter your message here",
                 resultLabel: "Result",
@@ -523,6 +545,7 @@
                 statusDecoded: "Message decrypted successfully!",
                 statusPasswordRequired: "Please enter a password",
                 statusMessageRequired: "Please enter a message",
+                passwordHint: "Use a password with letters for optimal security"
             },
             es: {
                 modalTitle: "Cómo utilizar este software",
@@ -531,7 +554,7 @@
                 passwordLabel: "Contraseña secreta",
                 passwordPlaceholder: "Ingrese su contraseña aquí",
                 continueBtn: "Continuar al cifrado",
-                appInfo: "Aplicación de cifrado por congruencia - Versión 1.0",
+                appInfo: "Aplicación de cifrado por congruencia - Versión 2.0",
                 messageLabel: "Mensaje para cifrar/descifrar",
                 messagePlaceholder: "Ingrese su mensaje aquí",
                 resultLabel: "Resultado",
@@ -544,6 +567,7 @@
                 statusDecoded: "¡Mensaje descifrado con éxito!",
                 statusPasswordRequired: "Por favor ingrese una contraseña",
                 statusMessageRequired: "Por favor ingrese un mensaje",
+                passwordHint: "Use una contraseña con letras para una seguridad óptima"
             },
             de: {
                 modalTitle: "So verwenden Sie diese Software",
@@ -552,7 +576,7 @@
                 passwordLabel: "Geheimes Passwort",
                 passwordPlaceholder: "Geben Sie hier Ihr Passwort ein",
                 continueBtn: "Zur Verschlüsselung fortfahren",
-                appInfo: "Kongruenz-Verschlüsselungsanwendung - Version 1.0",
+                appInfo: "Kongruenz-Verschlüsselungsanwendung - Version 2.0",
                 messageLabel: "Zu verschlüsselnde/entschlüsselnde Nachricht",
                 messagePlaceholder: "Geben Sie hier Ihre Nachricht ein",
                 resultLabel: "Ergebnis",
@@ -565,6 +589,7 @@
                 statusDecoded: "Nachricht erfolgreich entschlüsselt!",
                 statusPasswordRequired: "Bitte geben Sie ein Passwort ein",
                 statusMessageRequired: "Bitte geben Sie eine Nachricht ein",
+                passwordHint: "Verwenden Sie ein Passwort mit Buchstaben für optimale Sicherheit"
             },
             it: {
                 modalTitle: "Come utilizzare questo software",
@@ -573,9 +598,9 @@
                 passwordLabel: "Password segreta",
                 passwordPlaceholder: "Inserisci la tua password qui",
                 continueBtn: "Continua alla crittografia",
-                appInfo: "Applicazione di crittografia per congruenza - Versione 1.0",
+                appInfo: "Applicazione di crittografia per congruenza - Versione 2.0",
                 messageLabel: "Messaggio da crittografare/decrittografare",
-                messagePlaceholder: "Inserisci il tuo messaggio qui",
+                messagePlaceholder: "Inserisci il tuo messaggio aquí",
                 resultLabel: "Risultato",
                 copyLabel: "Copia risultato",
                 encodeLabel: "Crittografa",
@@ -586,6 +611,7 @@
                 statusDecoded: "Messaggio decrittografato con successo!",
                 statusPasswordRequired: "Si prega di inserire una password",
                 statusMessageRequired: "Si prega di inserire un messaggio",
+                passwordHint: "Utilizza una password con lettere per una sicurezza ottimale"
             },
             pt: {
                 modalTitle: "Como usar este software",
@@ -594,7 +620,7 @@
                 passwordLabel: "Senha secreta",
                 passwordPlaceholder: "Digite sua senha aqui",
                 continueBtn: "Continuar para criptografia",
-                appInfo: "Aplicativo de criptografia por congruência - Versão 1.0",
+                appInfo: "Aplicativo de criptografia por congruência - Versão 2.0",
                 messageLabel: "Mensagem para criptografar/descriptografar",
                 messagePlaceholder: "Digite sua mensagem aqui",
                 resultLabel: "Resultado",
@@ -607,6 +633,7 @@
                 statusDecoded: "Mensagem descriptografada com sucesso!",
                 statusPasswordRequired: "Por favor, insira uma senha",
                 statusMessageRequired: "Por favor, digite uma mensagem",
+                passwordHint: "Use uma senha com letras para segurança ideal"
             },
             ru: {
                 modalTitle: "Как использовать это программное обеспечение",
@@ -615,7 +642,7 @@
                 passwordLabel: "Секретный пароль",
                 passwordPlaceholder: "Введите ваш пароль здесь",
                 continueBtn: "Перейти к шифрованию",
-                appInfo: "Приложение для шифрования по конгруэнтности - Версия 1.0",
+                appInfo: "Приложение для шифрования по конгруэнтности - Версия 2.0",
                 messageLabel: "Сообщение для шифрования/дешифрования",
                 messagePlaceholder: "Введите ваше сообщение здесь",
                 resultLabel: "Результат",
@@ -628,6 +655,7 @@
                 statusDecoded: "Сообщение успешно расшифровано!",
                 statusPasswordRequired: "Пожалуйста, введите пароль",
                 statusMessageRequired: "Пожалуйста, введите сообщение",
+                passwordHint: "Используйте пароль с буквами для оптимальной безопасности"
             },
             zh: {
                 modalTitle: "如何使用此软件",
@@ -636,7 +664,7 @@
                 passwordLabel: "秘密密码",
                 passwordPlaceholder: "在此输入您的密码",
                 continueBtn: "继续加密",
-                appInfo: "同余加密应用程序 - 版本 1.0",
+                appInfo: "同余加密应用程序 - 版本 2.0",
                 messageLabel: "要加密/解密的消息",
                 messagePlaceholder: "在此输入您的消息",
                 resultLabel: "结果",
@@ -649,6 +677,7 @@
                 statusDecoded: "消息解密成功！",
                 statusPasswordRequired: "请输入密码",
                 statusMessageRequired: "请输入消息",
+                passwordHint: "使用带字母的密码以获得最佳安全性"
             },
             ja: {
                 modalTitle: "ソフトウェアの使用方法",
@@ -657,7 +686,7 @@
                 passwordLabel: "秘密のパスワード",
                 passwordPlaceholder: "ここにパスワードを入力してください",
                 continueBtn: "暗号化に進む",
-                appInfo: "合同暗号化アプリケーション - バージョン 1.0",
+                appInfo: "合同暗号化アプリケーション - バージョン 2.0",
                 messageLabel: "暗号化/復号するメッセージ",
                 messagePlaceholder: "ここにメッセージを入力してください",
                 resultLabel: "結果",
@@ -670,6 +699,7 @@
                 statusDecoded: "メッセージが正常に復号されました！",
                 statusPasswordRequired: "パスワードを入力してください",
                 statusMessageRequired: "メッセージを入力してください",
+                passwordHint: "最適なセキュリティのために文字を含むパスワードを使用してください"
             },
             ar: {
                 modalTitle: "كيفية استخدام هذا البرنامج",
@@ -678,7 +708,7 @@
                 passwordLabel: "كلمة مرور سرية",
                 passwordPlaceholder: "أدخل كلمة المرور هنا",
                 continueBtn: "المتابعة إلى التشفير",
-                appInfo: "تطبيق التشفير بالتطابق - الإصدار 1.0",
+                appInfo: "تطبيق التشفير بالتطابق - الإصدار 2.0",
                 messageLabel: "رسالة للتشفير/فك التشفير",
                 messagePlaceholder: "أدخل رسالتك هنا",
                 resultLabel: "النتيجة",
@@ -691,6 +721,7 @@
                 statusDecoded: "تم فك تشفير الرسالة بنجاح!",
                 statusPasswordRequired: "الرجاء إدخال كلمة مرور",
                 statusMessageRequired: "الرجاء إدخال رسالة",
+                passwordHint: "استخدم كلمة مرور تحتوي على أحرف لأفضل أمان"
             }
         };
 
@@ -709,24 +740,33 @@
             reverseSymbolMap[symbol] = letter;
         }
 
+        // Liste des nombres premiers avec 26 pour l'inverse modulaire
+        const coprimesWith26 = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
+
         // Fonction pour calculer a et b à partir du mot de passe
         function calculateAB(password) {
-            let firstLetter = null;
+            let firstLetterValue = 3; // Valeur par défaut si pas de lettres
             let total = 0;
+            let hasLetters = false;
             
             for (const char of password) {
                 if (/[a-zA-Z]/.test(char)) {
                     const letterValue = char.toUpperCase().charCodeAt(0) - 65;
-                    if (firstLetter === null) {
-                        firstLetter = letterValue;
+                    if (!hasLetters) {
+                        firstLetterValue = letterValue;
+                        hasLetters = true;
                     }
                     total += letterValue;
                 } else if (/[0-9]/.test(char)) {
                     total += parseInt(char);
+                } else {
+                    // Pour les caractères spéciaux, utiliser leur code ASCII
+                    total += char.charCodeAt(0) % 26;
                 }
             }
             
-            const a = firstLetter !== null ? firstLetter : 0;
+            // Utiliser une valeur coprime avec 26 pour a
+            const a = coprimesWith26[firstLetterValue % coprimesWith26.length];
             const b = total % 26;
             
             return { a, b };
@@ -756,7 +796,6 @@
                     const upperChar = char.toUpperCase();
                     const x = upperChar.charCodeAt(0) - 65;
                     const y = (a * x + b) % 26;
-                    if (y < 0) y += 26; // Assurer que c'est positif
                     const codedLetter = String.fromCharCode(y + 65);
                     result += symbolMap[codedLetter] || char;
                 } else {
@@ -816,6 +855,19 @@
             document.getElementById('encodeLabel').textContent = t.encodeLabel;
             document.getElementById('decodeLabel').textContent = t.decodeLabel;
             document.getElementById('backLabel').textContent = t.backLabel;
+            document.getElementById('passwordHint').textContent = t.passwordHint;
+        }
+
+        // Fonction pour vérifier la force du mot de passe
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            if (password.length > 0) strength += 20;
+            if (password.length > 5) strength += 20;
+            if (/[a-zA-Z]/.test(password)) strength += 20;
+            if (/[0-9]/.test(password)) strength += 20;
+            if (/[^a-zA-Z0-9]/.test(password)) strength += 20;
+            
+            document.getElementById('passwordStrength').style.width = strength + '%';
         }
 
         // Au chargement de la page
@@ -834,6 +886,11 @@
             document.getElementById('langSelect').addEventListener('change', function() {
                 const lang = this.value;
                 applyTranslations(lang);
+            });
+            
+            // Écouter les changements du mot de passe
+            document.getElementById('password').addEventListener('input', function() {
+                checkPasswordStrength(this.value);
             });
             
             // Appliquer la langue par défaut
@@ -872,6 +929,7 @@
             document.getElementById('message').value = '';
             document.getElementById('result').innerText = '';
             document.getElementById('status').innerText = '';
+            document.getElementById('passwordStrength').style.width = '0%';
             currentPassword = '';
         });
 
@@ -912,9 +970,13 @@
                 return;
             }
             
-            const encoded = encode(message, currentPassword);
-            document.getElementById('result').innerText = encoded;
-            showStatus(t.statusEncoded, 'success');
+            try {
+                const encoded = encode(message, currentPassword);
+                document.getElementById('result').innerText = encoded;
+                showStatus(t.statusEncoded, 'success');
+            } catch (error) {
+                showStatus("Erreur de cryptage: " + error.message, 'error');
+            }
         });
 
         // Gérer le bouton Décrypter
@@ -927,9 +989,13 @@
                 return;
             }
             
-            const decoded = decode(message, currentPassword);
-            document.getElementById('result').innerText = decoded;
-            showStatus(t.statusDecoded, 'success');
+            try {
+                const decoded = decode(message, currentPassword);
+                document.getElementById('result').innerText = decoded;
+                showStatus(t.statusDecoded, 'success');
+            } catch (error) {
+                showStatus("Erreur de décryptage: " + error.message, 'error');
+            }
         });
 
         // Afficher un message de statut

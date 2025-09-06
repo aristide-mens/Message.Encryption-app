@@ -1,1 +1,1015 @@
- 
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Congruence - Aristides Mens</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a0c1b;
+            --secondary: #141632;
+            --accent: #6a4dff;
+            --accent-hover: #7d64ff;
+            --accent2: #ff4df2;
+            --accent2-hover: #ff6df4;
+            --text: #e6e6ff;
+            --border: #3a3c5a;
+            --error: #ff4d7a;
+            --success: #4dffb8;
+            --warning: #ffd24d;
+            --card-bg: rgba(20, 22, 50, 0.7);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0c1b, #1a1c3a, #2a2c5a);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--secondary);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(106, 77, 255, 0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            z-index: 0;
+        }
+        
+        header {
+            background: rgba(10, 12, 27, 0.8);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            padding: 10px 0;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(106, 77, 255, 0.3);
+        }
+        
+        .language-container {
+            margin: 15px auto;
+            text-align: center;
+        }
+        
+        .lang-select {
+            background: rgba(10, 12, 27, 0.6);
+            color: var(--text);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 8px 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            width: 200px;
+        }
+        
+        .lang-select:hover {
+            border-color: var(--accent2);
+            box-shadow: 0 0 10px rgba(255, 77, 242, 0.3);
+        }
+        
+        .main-content {
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #a0a0ff;
+            font-size: 1.1rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(10, 12, 27, 0.6);
+            color: var(--text);
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        input:focus, textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(106, 77, 255, 0.3);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            outline: none !important;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            z-index: -1;
+            transition: all 0.4s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(106, 77, 255, 0.4);
+        }
+        
+        .btn:active, .btn:focus {
+            transform: translateY(0);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: #a0a0ff;
+        }
+        
+        .btn-secondary::before {
+            background: rgba(20, 22, 50, 0.8);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent2);
+            box-shadow: 0 10px 25px rgba(255, 77, 242, 0.3);
+        }
+        
+        .result-box {
+            background: rgba(10, 12, 27, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 140px;
+            color: var(--text);
+            font-size: 1.2rem;
+            word-break: break-word;
+            overflow-y: auto;
+            max-height: 250px;
+            line-height: 1.6;
+            backdrop-filter: blur(5px);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .flex-1 {
+            flex: 1;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .copy-btn {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid var(--accent2);
+            color: var(--accent2);
+        }
+        
+        .copy-btn::before {
+            background: rgba(255, 77, 242, 0.1);
+        }
+        
+        .copy-btn:hover {
+            box-shadow: 0 5px 20px rgba(255, 77, 242, 0.3);
+        }
+        
+        .status {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+            background: rgba(10, 12, 27, 0.7);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+        }
+        
+        .status.success {
+            border-color: var(--success);
+            color: var(--success);
+        }
+        
+        .status.error {
+            border-color: var(--error);
+            color: var(--error);
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 12, 27, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .modal-content {
+            background: var(--secondary);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent), transparent 70%);
+            opacity: 0.2;
+        }
+        
+        .modal h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .modal p {
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dont-show {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #a0a0ff;
+            font-size: 1rem;
+        }
+        
+        .modal-ok {
+            padding: 12px 30px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none !important;
+        }
+        
+        .modal-ok:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(106, 77, 255, 0.4);
+        }
+        
+        .app-info {
+            text-align: center;
+            margin-top: 30px;
+            color: #a0a0ff;
+            font-size: 1rem;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+        
+        .crypto-animation {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, rgba(106, 77, 255, 0.05));
+            z-index: 0;
+        }
+        
+        .password-strength {
+            height: 6px;
+            border-radius: 3px;
+            margin-top: 10px;
+            background: var(--border);
+            overflow: hidden;
+        }
+        
+        .password-strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            background: linear-gradient(90deg, var(--error), var(--warning), var(--success));
+        }
+        
+        @media (max-width: 768px) {
+            .buttons {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modal d'instructions -->
+    <div id="instructionModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Comment utiliser ce logiciel</h2>
+            <p id="modalText">Pour utiliser ce logiciel, commencez par saisir un mot de passe secret à partager avec votre destinataire. Entrez ensuite le message à crypter, copiez le message crypté, puis envoyez-le avec le mot de passe afin que votre destinataire puisse le décrypter.</p>
+            <div class="modal-actions">
+                <label class="dont-show">
+                    <input type="checkbox" id="dontShowAgain">
+                    <span id="dontShowLabel">Ne plus afficher ce message</span>
+                </label>
+                <button class="modal-ok" id="modalOk">Compris</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="crypto-animation"></div>
+        
+        <header>
+            <h1>ARISTIDES_MENS</h1>
+            <div class="language-container">
+                <select id="langSelect" class="lang-select">
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                    <option value="pt">Português</option>
+                    <option value="ru">Русский</option>
+                    <option value="zh">中文</option>
+                    <option value="ja">日本語</option>
+                    <option value="ar">العربية</option>
+                </select>
+            </div>
+        </header>
+        
+        <!-- Page 1: Saisie du mot de passe -->
+        <div id="page1" class="main-content">
+            <div class="card">
+                <label for="password" id="passwordLabel">Mot de passe secret</label>
+                <input type="password" id="password" placeholder="Entrez votre mot de passe ici" autocomplete="off">
+                <div class="password-strength">
+                    <div class="password-strength-fill" id="passwordStrength"></div>
+                </div>
+                <div id="passwordHint" style="margin-top: 10px; font-size: 0.9rem; color: #a0a0ff;">
+                    Utilisez un mot de passe avec des lettres pour une sécurité optimale
+                </div>
+            </div>
+            
+            <button id="continueBtn" class="btn btn-block">Continuer vers le cryptage</button>
+            
+            <div class="app-info">
+                <span id="appInfo">Application de cryptage par congruence - Version 2.0</span>
+            </div>
+        </div>
+        
+        <!-- Page 2: Cryptage/Décryptage -->
+        <div id="page2" class="main-content hidden">
+            <div class="card">
+                <label for="message" id="messageLabel">Message à crypter/décrypter</label>
+                <textarea id="message" placeholder="Entrez votre message ici" rows="4"></textarea>
+            </div>
+            
+            <div class="buttons">
+                <button id="encodeBtn" class="btn flex-1">
+                    <i class="fas fa-lock"></i> <span id="encodeLabel">Crypter</span>
+                </button>
+                <button id="decodeBtn" class="btn flex-1">
+                    <i class="fas fa-lock-open"></i> <span id="decodeLabel">Décrypter</span>
+                </button>
+            </div>
+            
+            <div class="card">
+                <label id="resultLabel">Résultat</label>
+                <div class="result-box" id="result"></div>
+                <button id="copyBtn" class="btn copy-btn">
+                    <i class="fas fa-copy"></i> <span id="copyLabel">Copier le résultat</span>
+                </button>
+                <div id="status" class="status"></div>
+            </div>
+            
+            <button id="backBtn" class="btn btn-secondary btn-block">
+                <i class="fas fa-arrow-left"></i> <span id="backLabel">Retour au mot de passe</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Traductions
+        const translations = {
+            fr: {
+                modalTitle: "Comment utiliser ce logiciel",
+                modalText: "Pour utiliser ce logiciel, commencez par saisir un mot de passe secret à partager avec votre destinataire. Entrez ensuite le message à crypter, copiez le message crypté, puis envoyez-le avec le mot de passe afin que votre destinataire puisse le décrypter.",
+                dontShowLabel: "Ne plus afficher ce message",
+                passwordLabel: "Mot de passe secret",
+                passwordPlaceholder: "Entrez votre mot de passe ici",
+                continueBtn: "Continuer vers le cryptage",
+                appInfo: "Application de cryptage par congruence - Version 2.0",
+                messageLabel: "Message à crypter/décrypter",
+                messagePlaceholder: "Entrez votre message ici",
+                resultLabel: "Résultat",
+                copyLabel: "Copier le résultat",
+                encodeLabel: "Crypter",
+                decodeLabel: "Décrypter",
+                backLabel: "Retour au mot de passe",
+                statusCopied: "Texte copié avec succès!",
+                statusEncoded: "Message crypté avec succès!",
+                statusDecoded: "Message décrypté avec succès!",
+                statusPasswordRequired: "Veuillez entrer un mot de passe",
+                statusMessageRequired: "Veuillez entrer un message",
+                passwordHint: "Utilisez un mot de passe avec des lettres pour une sécurité optimale"
+            },
+            en: {
+                modalTitle: "How to use this software",
+                modalText: "To use this software, start by entering a secret password to share with your recipient. Then enter the message to encrypt, copy the encrypted message, and send it with the password so your recipient can decrypt it.",
+                dontShowLabel: "Don't show this message again",
+                passwordLabel: "Secret password",
+                passwordPlaceholder: "Enter your password here",
+                continueBtn: "Continue to encryption",
+                appInfo: "Congruence encryption application - Version 2.0",
+                messageLabel: "Message to encrypt/decrypt",
+                messagePlaceholder: "Enter your message here",
+                resultLabel: "Result",
+                copyLabel: "Copy result",
+                encodeLabel: "Encrypt",
+                decodeLabel: "Decrypt",
+                backLabel: "Back to password",
+                statusCopied: "Text copied successfully!",
+                statusEncoded: "Message encrypted successfully!",
+                statusDecoded: "Message decrypted successfully!",
+                statusPasswordRequired: "Please enter a password",
+                statusMessageRequired: "Please enter a message",
+                passwordHint: "Use a password with letters for optimal security"
+            },
+            es: {
+                modalTitle: "Cómo utilizar este software",
+                modalText: "Para usar este software, comience ingresando una contraseña secreta para compartir con su destinatario. Luego ingrese el mensaje a encriptar, copie el mensaje encriptado y envíelo con la contraseña para que su destinatario pueda desencriptarlo.",
+                dontShowLabel: "No mostrar este mensaje nuevamente",
+                passwordLabel: "Contraseña secreta",
+                passwordPlaceholder: "Ingrese su contraseña aquí",
+                continueBtn: "Continuar al cifrado",
+                appInfo: "Aplicación de cifrado por congruencia - Versión 2.0",
+                messageLabel: "Mensaje para cifrar/descifrar",
+                messagePlaceholder: "Ingrese su mensaje aquí",
+                resultLabel: "Resultado",
+                copyLabel: "Copiar resultado",
+                encodeLabel: "Cifrar",
+                decodeLabel: "Descifrar",
+                backLabel: "Volver a la contraseña",
+                statusCopied: "¡Texto copiado con éxito!",
+                statusEncoded: "¡Mensaje cifrado con éxito!",
+                statusDecoded: "¡Mensaje descifrado con éxito!",
+                statusPasswordRequired: "Por favor ingrese una contraseña",
+                statusMessageRequired: "Por favor ingrese un mensaje",
+                passwordHint: "Use una contraseña con letras para una seguridad óptima"
+            },
+            de: {
+                modalTitle: "So verwenden Sie diese Software",
+                modalText: "Um diese Software zu verwenden, geben Sie zunächst ein geheimes Passwort ein, das Sie mit Ihrem Empfänger teilen können. Geben Sie dann die zu verschlüsselnde Nachricht ein, kopieren Sie die verschlüsselte Nachricht und senden Sie sie mit dem Passwort, damit Ihr Empfänger sie entschlüsseln kann.",
+                dontShowLabel: "Diese Nachricht nicht mehr anzeigen",
+                passwordLabel: "Geheimes Passwort",
+                passwordPlaceholder: "Geben Sie hier Ihr Passwort ein",
+                continueBtn: "Zur Verschlüsselung fortfahren",
+                appInfo: "Kongruenz-Verschlüsselungsanwendung - Version 2.0",
+                messageLabel: "Zu verschlüsselnde/entschlüsselnde Nachricht",
+                messagePlaceholder: "Geben Sie hier Ihre Nachricht ein",
+                resultLabel: "Ergebnis",
+                copyLabel: "Ergebnis kopieren",
+                encodeLabel: "Verschlüsseln",
+                decodeLabel: "Entschlüsseln",
+                backLabel: "Zurück zum Passwort",
+                statusCopied: "Text erfolgreich kopiert!",
+                statusEncoded: "Nachricht erfolgreich verschlüsselt!",
+                statusDecoded: "Nachricht erfolgreich entschlüsselt!",
+                statusPasswordRequired: "Bitte geben Sie ein Passwort ein",
+                statusMessageRequired: "Bitte geben Sie eine Nachricht ein",
+                passwordHint: "Verwenden Sie ein Passwort mit Buchstaben für optimale Sicherheit"
+            },
+            it: {
+                modalTitle: "Come utilizzare questo software",
+                modalText: "Per utilizzare questo software, inizia inserendo una password segreta da condividere con il tuo destinatario. Quindi inserisci il messaggio da crittografare, copia il messaggio crittografato e invialo con la password in modo che il tuo destinatario possa decrittografarlo.",
+                dontShowLabel: "Non mostrare più questo messaggio",
+                passwordLabel: "Password segreta",
+                passwordPlaceholder: "Inserisci la tua password qui",
+                continueBtn: "Continua alla crittografia",
+                appInfo: "Applicazione di crittografia per congruenza - Versione 2.0",
+                messageLabel: "Messaggio da crittografare/decrittografare",
+                messagePlaceholder: "Inserisci il tuo messaggio aquí",
+                resultLabel: "Risultato",
+                copyLabel: "Copia risultato",
+                encodeLabel: "Crittografa",
+                decodeLabel: "Decrittografa",
+                backLabel: "Torna alla password",
+                statusCopied: "Testo copiato con successo!",
+                statusEncoded: "Messaggio crittografato con successo!",
+                statusDecoded: "Messaggio decrittografato con successo!",
+                statusPasswordRequired: "Si prega di inserire una password",
+                statusMessageRequired: "Si prega di inserire un messaggio",
+                passwordHint: "Utilizza una password con lettere per una sicurezza ottimale"
+            },
+            pt: {
+                modalTitle: "Como usar este software",
+                modalText: "Para usar este software, comece inserindo uma senha secreta para compartilhar com seu destinatário. Em seguida, insira a mensagem a ser criptografada, copie a mensagem criptografada e envie-a com a senha para que seu destinatário possa descriptografá-la.",
+                dontShowLabel: "Não mostrar esta mensagem novamente",
+                passwordLabel: "Senha secreta",
+                passwordPlaceholder: "Digite sua senha aqui",
+                continueBtn: "Continuar para criptografia",
+                appInfo: "Aplicativo de criptografia por congruência - Versão 2.0",
+                messageLabel: "Mensagem para criptografar/descriptografar",
+                messagePlaceholder: "Digite sua mensagem aqui",
+                resultLabel: "Resultado",
+                copyLabel: "Copiar resultado",
+                encodeLabel: "Criptografar",
+                decodeLabel: "Descriptografar",
+                backLabel: "Voltar à senha",
+                statusCopied: "Texto copiado com sucesso!",
+                statusEncoded: "Mensagem criptografada com sucesso!",
+                statusDecoded: "Mensagem descriptografada com sucesso!",
+                statusPasswordRequired: "Por favor, insira uma senha",
+                statusMessageRequired: "Por favor, digite uma mensagem",
+                passwordHint: "Use uma senha com letras para segurança ideal"
+            },
+            ru: {
+                modalTitle: "Как использовать это программное обеспечение",
+                modalText: "Чтобы использовать это программное обеспечение, начните с ввода секретного пароля, которым вы поделитесь с получателем. Затем введите сообщение для шифрования, скопируйте зашифрованное сообщение и отправьте его с паролем, чтобы получатель мог его расшифровать.",
+                dontShowLabel: "Не показывать это сообщение снова",
+                passwordLabel: "Секретный пароль",
+                passwordPlaceholder: "Введите ваш пароль здесь",
+                continueBtn: "Перейти к шифрованию",
+                appInfo: "Приложение для шифрования по конгруэнтности - Версия 2.0",
+                messageLabel: "Сообщение для шифрования/дешифрования",
+                messagePlaceholder: "Введите ваше сообщение здесь",
+                resultLabel: "Результат",
+                copyLabel: "Копировать результат",
+                encodeLabel: "Зашифровать",
+                decodeLabel: "Расшифровать",
+                backLabel: "Вернуться к паролю",
+                statusCopied: "Текст успешно скопирован!",
+                statusEncoded: "Сообщение успешно зашифровано!",
+                statusDecoded: "Сообщение успешно расшифровано!",
+                statusPasswordRequired: "Пожалуйста, введите пароль",
+                statusMessageRequired: "Пожалуйста, введите сообщение",
+                passwordHint: "Используйте пароль с буквами для оптимальной безопасности"
+            },
+            zh: {
+                modalTitle: "如何使用此软件",
+                modalText: "要使用此软件，请首先输入要与收件人共享的密码。然后输入要加密的消息，复制加密的消息，并将其与密码一起发送，以便收件人可以解密它。",
+                dontShowLabel: "不再显示此消息",
+                passwordLabel: "秘密密码",
+                passwordPlaceholder: "在此输入您的密码",
+                continueBtn: "继续加密",
+                appInfo: "同余加密应用程序 - 版本 2.0",
+                messageLabel: "要加密/解密的消息",
+                messagePlaceholder: "在此输入您的消息",
+                resultLabel: "结果",
+                copyLabel: "复制结果",
+                encodeLabel: "加密",
+                decodeLabel: "解密",
+                backLabel: "返回密码",
+                statusCopied: "文本复制成功！",
+                statusEncoded: "消息加密成功！",
+                statusDecoded: "消息解密成功！",
+                statusPasswordRequired: "请输入密码",
+                statusMessageRequired: "请输入消息",
+                passwordHint: "使用带字母的密码以获得最佳安全性"
+            },
+            ja: {
+                modalTitle: "ソフトウェアの使用方法",
+                modalText: "このソフトウェアを使用するには、まず受信者と共有する秘密のパスワードを入力します。次に、暗号化するメッセージを入力し、暗号化されたメッセージをコピーして、受信者が復号できるようにパスワードと一緒に送信します。",
+                dontShowLabel: "このメッセージを再表示しない",
+                passwordLabel: "秘密のパスワード",
+                passwordPlaceholder: "ここにパスワードを入力してください",
+                continueBtn: "暗号化に進む",
+                appInfo: "合同暗号化アプリケーション - バージョン 2.0",
+                messageLabel: "暗号化/復号するメッセージ",
+                messagePlaceholder: "ここにメッセージを入力してください",
+                resultLabel: "結果",
+                copyLabel: "結果をコピー",
+                encodeLabel: "暗号化",
+                decodeLabel: "復号",
+                backLabel: "パスワードに戻る",
+                statusCopied: "テキストが正常にコピーされました！",
+                statusEncoded: "メッセージが正常に暗号化されました！",
+                statusDecoded: "メッセージが正常に復号されました！",
+                statusPasswordRequired: "パスワードを入力してください",
+                statusMessageRequired: "メッセージを入力してください",
+                passwordHint: "最適なセキュリティのために文字を含むパスワードを使用してください"
+            },
+            ar: {
+                modalTitle: "كيفية استخدام هذا البرنامج",
+                modalText: "لاستخدام هذا البرنامج، ابدأ بإدخال كلمة مرور سرية لمشاركتها مع المستلم. ثم أدخل الرسالة المراد تشفيرها، وانسخ الرسالة المشفرة، وأرسلها مع كلمة المرور حتى يتمكن المستلم من فك تشفيرها.",
+                dontShowLabel: "عدم إظهار هذه الرسالة مرة أخرى",
+                passwordLabel: "كلمة مرور سرية",
+                passwordPlaceholder: "أدخل كلمة المرور هنا",
+                continueBtn: "المتابعة إلى التشفير",
+                appInfo: "تطبيق التشفير بالتطابق - الإصدار 2.0",
+                messageLabel: "رسالة للتشفير/فك التشفير",
+                messagePlaceholder: "أدخل رسالتك هنا",
+                resultLabel: "النتيجة",
+                copyLabel: "نسخ النتيجة",
+                encodeLabel: "تشفير",
+                decodeLabel: "فك التشفير",
+                backLabel: "العودة إلى كلمة المرور",
+                statusCopied: "تم نسخ النص بنجاح!",
+                statusEncoded: "تم تشفير الرسالة بنجاح!",
+                statusDecoded: "تم فك تشفير الرسالة بنجاح!",
+                statusPasswordRequired: "الرجاء إدخال كلمة مرور",
+                statusMessageRequired: "الرجاء إدخال رسالة",
+                passwordHint: "استخدم كلمة مرور تحتوي على أحرف لأفضل أمان"
+            }
+        };
+
+        // Définir le mapping des symboles
+        const symbolMap = {
+            'A': '+', 'B': '#', 'C': '°', 'D': '√', 'E': '\\', 
+            'F': '™', 'G': ']', 'H': '÷', 'I': 'π', 'J': '{', 
+            'K': '&', 'L': '^', 'M': '§', 'N': '¥', 'O': '∆', 
+            'P': '£', 'Q': '¢', 'R': '%', 'S': '~', 'T': '©', 
+            'U': '-', 'V': '•', 'W': '€', 'X': '®', 'Y': '✓', 'Z': '|'
+        };
+
+        // Créer le reverse mapping pour le décodage
+        const reverseSymbolMap = {};
+        for (const [letter, symbol] of Object.entries(symbolMap)) {
+            reverseSymbolMap[symbol] = letter;
+        }
+
+        // Liste des nombres premiers avec 26 pour l'inverse modulaire
+        const coprimesWith26 = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
+
+        // Fonction pour calculer a et b à partir du mot de passe
+        function calculateAB(password) {
+            let firstLetterValue = 3; // Valeur par défaut si pas de lettres
+            let total = 0;
+            let hasLetters = false;
+            
+            for (const char of password) {
+                if (/[a-zA-Z]/.test(char)) {
+                    const letterValue = char.toUpperCase().charCodeAt(0) - 65;
+                    if (!hasLetters) {
+                        firstLetterValue = letterValue;
+                        hasLetters = true;
+                    }
+                    total += letterValue;
+                } else if (/[0-9]/.test(char)) {
+                    total += parseInt(char);
+                } else {
+                    // Pour les caractères spéciaux, utiliser leur code ASCII
+                    total += char.charCodeAt(0) % 26;
+                }
+            }
+            
+            // Utiliser une valeur coprime avec 26 pour a
+            const a = coprimesWith26[firstLetterValue % coprimesWith26.length];
+            const b = total % 26;
+            
+            return { a, b };
+        }
+
+        // Fonction pour calculer l'inverse modulaire
+        function modInverse(a, mod) {
+            a = a % mod;
+            if (a < 0) a += mod;
+            
+            // Trouver l'inverse modulaire
+            for (let x = 1; x < mod; x++) {
+                if ((a * x) % mod === 1) {
+                    return x;
+                }
+            }
+            return 1;
+        }
+
+        // Fonction de codage
+        function encode(text, password) {
+            const { a, b } = calculateAB(password);
+            let result = '';
+            
+            for (const char of text) {
+                if (/[a-zA-Z]/.test(char)) {
+                    const upperChar = char.toUpperCase();
+                    const x = upperChar.charCodeAt(0) - 65;
+                    const y = (a * x + b) % 26;
+                    const codedLetter = String.fromCharCode(y + 65);
+                    result += symbolMap[codedLetter] || char;
+                } else {
+                    // Garder les caractères non-alphabétiques inchangés
+                    result += char;
+                }
+            }
+            
+            return result;
+        }
+
+        // Fonction de décodage
+        function decode(text, password) {
+            const { a, b } = calculateAB(password);
+            const aInverse = modInverse(a, 26);
+            let result = '';
+            
+            for (const char of text) {
+                if (Object.values(symbolMap).includes(char)) {
+                    const symbol = char;
+                    const codedLetter = reverseSymbolMap[symbol];
+                    const y = codedLetter.charCodeAt(0) - 65;
+                    let x = (aInverse * (y - b)) % 26;
+                    if (x < 0) x += 26;
+                    const decodedLetter = String.fromCharCode(x + 65);
+                    result += decodedLetter;
+                } else {
+                    // Garder les caractères non-reconnus inchangés
+                    result += char;
+                }
+            }
+            
+            return result;
+        }
+
+        // Variables globales
+        let currentPassword = '';
+        let currentLang = 'fr';
+
+        // Fonction pour appliquer les traductions
+        function applyTranslations(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            
+            // Mettre à jour le texte
+            document.getElementById('modalTitle').textContent = t.modalTitle;
+            document.getElementById('modalText').textContent = t.modalText;
+            document.getElementById('dontShowLabel').textContent = t.dontShowLabel;
+            document.getElementById('passwordLabel').textContent = t.passwordLabel;
+            document.getElementById('password').placeholder = t.passwordPlaceholder;
+            document.getElementById('continueBtn').innerHTML = t.continueBtn;
+            document.getElementById('appInfo').textContent = t.appInfo;
+            document.getElementById('messageLabel').textContent = t.messageLabel;
+            document.getElementById('message').placeholder = t.messagePlaceholder;
+            document.getElementById('resultLabel').textContent = t.resultLabel;
+            document.getElementById('copyLabel').textContent = t.copyLabel;
+            document.getElementById('encodeLabel').textContent = t.encodeLabel;
+            document.getElementById('decodeLabel').textContent = t.decodeLabel;
+            document.getElementById('backLabel').textContent = t.backLabel;
+            document.getElementById('passwordHint').textContent = t.passwordHint;
+        }
+
+        // Fonction pour vérifier la force du mot de passe
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            if (password.length > 0) strength += 20;
+            if (password.length > 5) strength += 20;
+            if (/[a-zA-Z]/.test(password)) strength += 20;
+            if (/[0-9]/.test(password)) strength += 20;
+            if (/[^a-zA-Z0-9]/.test(password)) strength += 20;
+            
+            document.getElementById('passwordStrength').style.width = strength + '%';
+        }
+
+        // Au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Vérifier si on doit afficher le modal
+            if (localStorage.getItem('hidePrompt') !== 'true') {
+                document.getElementById('instructionModal').style.display = 'flex';
+            }
+            
+            // Effacer les champs
+            document.getElementById('password').value = '';
+            document.getElementById('message').value = '';
+            document.getElementById('result').innerText = '';
+            
+            // Écouter les changements de langue
+            document.getElementById('langSelect').addEventListener('change', function() {
+                const lang = this.value;
+                applyTranslations(lang);
+            });
+            
+            // Écouter les changements du mot de passe
+            document.getElementById('password').addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+            });
+            
+            // Appliquer la langue par défaut
+            applyTranslations('fr');
+        });
+
+        // Gérer le bouton OK du modal
+        document.getElementById('modalOk').addEventListener('click', function() {
+            if (document.getElementById('dontShowAgain').checked) {
+                localStorage.setItem('hidePrompt', 'true');
+            }
+            document.getElementById('instructionModal').style.display = 'none';
+        });
+
+        // Gérer le bouton Continuer
+        document.getElementById('continueBtn').addEventListener('click', function() {
+            const password = document.getElementById('password').value;
+            const t = translations[currentLang];
+            
+            if (!password) {
+                showStatus(t.statusPasswordRequired, 'error');
+                return;
+            }
+            
+            currentPassword = password;
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+            document.getElementById('message').focus();
+        });
+
+        // Gérer le bouton Retour
+        document.getElementById('backBtn').addEventListener('click', function() {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page1').classList.remove('hidden');
+            document.getElementById('password').value = '';
+            document.getElementById('message').value = '';
+            document.getElementById('result').innerText = '';
+            document.getElementById('status').innerText = '';
+            document.getElementById('passwordStrength').style.width = '0%';
+            currentPassword = '';
+        });
+
+        // Gérer le bouton Copier
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const result = document.getElementById('result').innerText;
+            const t = translations[currentLang];
+            
+            if (!result) return;
+            
+            // Créer un élément textarea temporaire
+            const textArea = document.createElement('textarea');
+            textArea.value = result;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showStatus(t.statusCopied, 'success');
+                } else {
+                    showStatus(t.statusCopied, 'error');
+                }
+            } catch (err) {
+                showStatus(t.statusCopied + err, 'error');
+            }
+            
+            document.body.removeChild(textArea);
+        });
+
+        // Gérer le bouton Crypter
+        document.getElementById('encodeBtn').addEventListener('click', function() {
+            const message = document.getElementById('message').value;
+            const t = translations[currentLang];
+            
+            if (!message) {
+                showStatus(t.statusMessageRequired, 'error');
+                return;
+            }
+            
+            try {
+                const encoded = encode(message, currentPassword);
+                document.getElementById('result').innerText = encoded;
+                showStatus(t.statusEncoded, 'success');
+            } catch (error) {
+                showStatus("Erreur de cryptage: " + error.message, 'error');
+            }
+        });
+
+        // Gérer le bouton Décrypter
+        document.getElementById('decodeBtn').addEventListener('click', function() {
+            const message = document.getElementById('message').value;
+            const t = translations[currentLang];
+            
+            if (!message) {
+                showStatus(t.statusMessageRequired, 'error');
+                return;
+            }
+            
+            try {
+                const decoded = decode(message, currentPassword);
+                document.getElementById('result').innerText = decoded;
+                showStatus(t.statusDecoded, 'success');
+            } catch (error) {
+                showStatus("Erreur de décryptage: " + error.message, 'error');
+            }
+        });
+
+        // Afficher un message de statut
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = 'status ' + type;
+            
+            // Effacer après 3 secondes
+            setTimeout(() => {
+                statusEl.textContent = '';
+                statusEl.className = 'status';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

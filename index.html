@@ -48,11 +48,10 @@ input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(
 .dont-show{display:flex;align-items:center;gap:10px;color:#a0a0ff;font-size:1rem}
 .modal-ok{padding:12px 30px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;outline:none !important}
 .modal-ok:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(106,77,255,0.4)}
-.app-info{text-align:center;margin-top:30px;color:#a0a0ff;font-size:1rem;border-top:1px solid var(--border);padding-top:20px}
-.crypto-animation{position:absolute;bottom:0;left:0;width:100%;height:100px;background:linear-gradient(transparent, rgba(106,77,255,0.05));z-index:0}
 .password-strength{height:6px;border-radius:3px;margin-top:10px;background:var(--border);overflow:hidden}
 .password-strength-fill{height:100%;width:0%;transition:width 0.3s ease;background:linear-gradient(90deg,var(--error),var(--warning),var(--success))}
-@media (max-width:768px){.buttons{flex-direction:column}h1{font-size:2.2rem}.main-content{padding:20px}.modal-content{padding:20px}}
+.crypto-animation{position:absolute;bottom:0;left:0;width:100%;height:100px;background:linear-gradient(transparent, rgba(106,77,255,0.05));z-index:0}
+@media (max-width:768px){.buttons{flex-direction:column}h1{font-size:2.2rem}.main-content{padding:20px}.modal-content{padding:20px}.modal-actions{flex-direction:column;gap:15px}}
 </style>
 </head>
 <body>
@@ -90,9 +89,6 @@ input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(
 <div id="passwordHint" style="margin-top:10px;font-size:0.9rem;color:#a0a0ff;">Utilisez un mot de passe avec des lettres pour une sécurité optimale</div>
 </div>
 <button id="continueBtn" class="btn btn-block">Continuer vers le cryptage</button>
-<div class="app-info">
-<span id="appInfo">Application de cryptage par congruence - Version 2.0</span>
-</div>
 </div>
 <div id="page2" class="main-content hidden">
 <div class="card">
@@ -121,7 +117,228 @@ input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(
 </div>
 </div>
 <script>
-const translations={"fr":{"modalTitle":"Comment utiliser ce logiciel","modalText":"Pour utiliser ce logiciel, commencez par saisir un mot de passe secret à partager avec votre destinataire. Entrez ensuite le message à crypter, copiez le message crypté, puis envoyez-le avec le mot de passe afin que votre destinataire puisse le décrypter.","dontShowLabel":"Ne plus afficher ce message","passwordLabel":"Mot de passe secret","passwordPlaceholder":"Entrez votre mot de passe ici","continueBtn":"Continuer vers le cryptage","appInfo":"Application de cryptage par congruence - Version 2.0","messageLabel":"Message à crypter/décrypter","messagePlaceholder":"Entrez votre message ici","resultLabel":"Résultat","copyLabel":"Copier le résultat","encodeLabel":"Crypter","decodeLabel":"Décrypter","backLabel":"Retour au mot de passe","statusCopied":"Texte copié avec succès!","statusEncoded":"Message crypté avec succès!","statusDecoded":"Message décrypté avec succès!","statusPasswordRequired":"Veuillez entrer un mot de passe","statusMessageRequired":"Veuillez entrer un message","passwordHint":"Utilisez un mot de passe avec des lettres pour une sécurité optimale"},"en":{"modalTitle":"How to use this software","modalText":"To use this software, start by entering a secret password to share with your recipient. Then enter the message to encrypt, copy the encrypted message, and send it with the password so your recipient can decrypt it.","dontShowLabel":"Don't show this message again","passwordLabel":"Secret password","passwordPlaceholder":"Enter your password here","continueBtn":"Continue to encryption","appInfo":"Congruence encryption application - Version 2.0","messageLabel":"Message to encrypt/decrypt","messagePlaceholder":"Enter your message here","resultLabel":"Result","copyLabel":"Copy result","encodeLabel":"Encrypt","decodeLabel":"Decrypt","backLabel":"Back to password","statusCopied":"Text copied successfully!","statusEncoded":"Message encrypted successfully!","statusDecoded":"Message decrypted successfully!","statusPasswordRequired":"Please enter a password","statusMessageRequired":"Please enter a message","passwordHint":"Use a password with letters for optimal security"},"es":{"modalTitle":"Cómo utilizar este software","modalText":"Para usar este software, comience ingresando una contraseña secreta para compartir con su destinatario. Luego ingrese el mensaje a encriptar, copie el mensaje encriptado y envíelo con la contraseña para que su destinatario pueda desencriptarlo.","dontShowLabel":"No mostrar este mensaje nuevamente","passwordLabel":"Contraseña secreta","passwordPlaceholder":"Ingrese su contraseña aquí","continueBtn":"Continuar al cifrado","appInfo":"Aplicación de cifrado por congruencia - Versión 2.0","messageLabel":"Mensaje para cifrar/descifrar","messagePlaceholder":"Ingrese su mensaje aquí","resultLabel":"Resultado","copyLabel":"Copiar resultado","encodeLabel":"Cifrar","decodeLabel":"Descifrar","backLabel":"Volver a la contraseña","statusCopied":"¡Texto copiado con éxito!","statusEncoded":"¡Mensaje cifrado con éxito!","statusDecoded":"¡Mensaje descifrado con éxito!","statusPasswordRequired":"Por favor ingrese una contraseña","statusMessageRequired":"Por favor ingrese un mensaje","passwordHint":"Use una contraseña con letras para una seguridad óptima"},"de":{"modalTitle":"So verwenden Sie diese Software","modalText":"Um diese Software zu verwenden, geben Sie zunächst ein geheimes Passwort ein, das Sie mit Ihrem Empfänger teilen können. Geben Sie dann die zu verschlüsselnde Nachricht ein, kopieren Sie die verschlüsselte Nachricht und senden Sie sie mit dem Passwort, damit Ihr Empfänger sie entschlüsseln kann.","dontShowLabel":"Diese Nachricht nicht mehr anzeigen","passwordLabel":"Geheimes Passwort","passwordPlaceholder":"Geben Sie hier Ihr Passwort ein","continueBtn":"Zur Verschlüsselung fortfahren","appInfo":"Kongruenz-Verschlüsselungsanwendung - Version 2.0","messageLabel":"Zu verschlüsselnde/entschlüsselnde Nachricht","messagePlaceholder":"Geben Sie hier Ihre Nachricht ein","resultLabel":"Ergebnis","copyLabel":"Ergebnis kopieren","encodeLabel":"Verschlüsseln","decodeLabel":"Entschlüsseln","backLabel":"Zurück zum Passwort","statusCopied":"Text erfolgreich kopiert!","statusEncoded":"Nachricht erfolgreich verschlüsselt!","statusDecoded":"Nachricht erfolgreich entschlüsselt!","statusPasswordRequired":"Bitte geben Sie ein Passwort ein","statusMessageRequired":"Bitte geben Sie eine Nachricht ein","passwordHint":"Verwenden Sie ein Passwort mit Buchstaben für optimale Sicherheit"},"it":{"modalTitle":"Come utilizzare questo software","modalText":"Per utilizzare questo software, inizia inserendo una password segreta da condividere con il tuo destinatario. Quindi inserisci il messaggio da crittografare, copia il messaggio crittografato e invialo con la password in modo che il tuo destinatario possa decrittografarlo.","dontShowLabel":"Non mostrare più questo messaggio","passwordLabel":"Password segreta","passwordPlaceholder":"Inserisci la tua password qui","continueBtn":"Continua alla crittografia","appInfo":"Applicazione di crittografia per congruenza - Versione 2.0","messageLabel":"Messaggio da crittografare/decrittografare","messagePlaceholder":"Inserisci il tuo messaggio aquí","resultLabel":"Risultato","copyLabel":"Copia risultato","encodeLabel":"Crittografa","decodeLabel":"Decrittografa","backLabel":"Torna alla password","statusCopied":"Testo copiato con successo!","statusEncoded":"Messaggio crittografato con successo!","statusDecoded":"Messaggio decrittografato con successo!","statusPasswordRequired":"Si prega di inserire una password","statusMessageRequired":"Si prega di inserire un messaggio","passwordHint":"Utilizza una password con lettere per una sicurezza ottimale"},"pt":{"modalTitle":"Como usar este software","modalText":"Para usar este software, comece inserindo uma senha secreta para compartilhar com seu destinatário. Em seguida, insira a mensagem a ser criptografada, copie a mensagem criptografada e envie-a com a senha para que seu destinatário possa descriptografá-la.","dontShowLabel":"Não mostrar esta mensagem novamente","passwordLabel":"Senha secreta","passwordPlaceholder":"Digite sua senha aqui","continueBtn":"Continuar para criptografia","appInfo":"Aplicativo de criptografia por congruência - Versão 2.0","messageLabel":"Mensagem para criptografar/descriptografar","messagePlaceholder":"Digite sua mensagem aqui","resultLabel":"Resultado","copyLabel":"Copiar resultado","encodeLabel":"Criptografar","decodeLabel":"Descriptografar","backLabel":"Voltar à senha","statusCopied":"Texto copiado com sucesso!","statusEncoded":"Mensagem criptografada com sucesso!","statusDecoded":"Mensagem descriptografada com sucesso!","statusPasswordRequired":"Por favor, insira uma senha","statusMessageRequired":"Por favor, digite uma mensagem","passwordHint":"Use uma senha com letras para segurança ideal"},"ru":{"modalTitle":"Как использовать это программное обеспечение","modalText":"Чтобы использовать это программное обеспечение, начните с ввода секретного пароля, которым вы поделитесь с получателем. Затем введите сообщение для шифрования, скопируйте зашифрованное сообщение и отправьте его с паролем, чтобы получатель мог его расшифровать.","dontShowLabel":"Не показывать это сообщение снова","passwordLabel":"Секретный пароль","passwordPlaceholder":"Введите ваш пароль здесь","continueBtn":"Перейти к шифрованию","appInfo":"Приложение для шифрования по конгруэнтности - Версия 2.0","messageLabel":"Сообщение для шифрования/дешифрования","messagePlaceholder":"Введите ваше сообщение здесь","resultLabel":"Результат","copyLabel":"Копировать результат","encodeLabel":"Зашифровать","decodeLabel":"Расшифровать","backLabel":"Вернуться к паролю","statusCopied":"Текст успешно скопирован!","statusEncoded":"Сообщение успешно зашифровано!","statusDecoded":"Сообщение успешно расшифровано!","statusPasswordRequired":"Пожалуйста, введите пароль","statusMessageRequired":"Пожалуйста, введите сообщение","passwordHint":"Используйте пароль с буквами для оптимальной безопасности"},"zh":{"modalTitle":"如何使用此软件","modalText":"要使用此软件，请首先输入要与收件人共享的密码。然后输入要加密的消息，复制加密的消息，并将其与密码一起发送，以便收件人可以解密它。","dontShowLabel":"不再显示此消息","passwordLabel":"秘密密码","passwordPlaceholder":"在此输入您的密码","continueBtn":"继续加密","appInfo":"同余加密应用程序 - 版本 2.0","messageLabel":"要加密/解密的消息","messagePlaceholder":"在此输入您的消息","resultLabel":"结果","copyLabel":"复制结果","encodeLabel":"加密","decodeLabel":"解密","backLabel":"返回密码","statusCopied":"文本复制成功！","statusEncoded":"消息加密成功！","statusDecoded":"消息解密成功！","statusPasswordRequired":"请输入密码","statusMessageRequired":"请输入消息","passwordHint":"使用带字母的密码以获得最佳安全性"},"ja":{"modalTitle":"ソフトウェアの使用方法","modalText":"このソフトウェアを使用するには、まず受信者と共有する秘密のパスワードを入力します。次に、暗号化するメッセージを入力し、暗号化されたメッセージをコピーして、受信者が復号できるようにパスワードと一緒に送信します。","dontShowLabel":"このメッセージを再表示しない","passwordLabel":"秘密のパスワード","passwordPlaceholder":"ここにパスワードを入力してください","continueBtn":"暗号化に進む","appInfo":"合同暗号化アプリケーション - バージョン 2.0","messageLabel":"暗号化/復号するメッセージ","messagePlaceholder":"ここにメッセージを入力してください","resultLabel":"結果","copyLabel":"結果をコピー","encodeLabel":"暗号化","decodeLabel":"復号","backLabel":"パスワードに戻る","statusCopied":"テキストが正常にコピーされました！","statusEncoded":"メッセージが正常に暗号化されました！","statusDecoded":"メッセージが正常に復号されました！","statusPasswordRequired":"パスワードを入力してください","statusMessageRequired":"メッセージを入力してください","passwordHint":"最適なセキュリティのために文字を含むパスワードを使用してください"},"ar":{"modalTitle":"كيفية استخدام هذا البرنامج","modalText":"لاستخدام هذا البرنامج، ابدأ بإدخال كلمة مرور سرية لمشاركتها مع المستلم. ثم أدخل الرسالة المراد تشفيرها، وانسخ الرسالة المشفرة، وأرسلها مع كلمة المرور حتى يتمكن المستلم من فك تشفيرها.","dontShowLabel":"عدم إظهار هذه الرسالة مرة أخرى","passwordLabel":"كلمة مرور سرية","passwordPlaceholder":"أدخل كلمة المرور هنا","continueBtn":"المتابعة إلى التشفير","appInfo":"تطبيق التشفير بالتطابق - الإصدار 2.0","messageLabel":"رسالة للتشفير/فك التشفير","messagePlaceholder":"أدخل رسالتك هنا","resultLabel":"النتيجة","copyLabel":"نسخ النتيجة","encodeLabel":"تشفير","decodeLabel":"فك التشفير","backLabel":"العودة إلى كلمة المرور","statusCopied":"تم نسخ النص بنجاح!","statusEncoded":"تم تشفير الرسالة بنجاح!","statusDecoded":"تم فك تشفير الرسالة بنجاح!","statusPasswordRequired":"الرجاء إدخال كلمة مرور","statusMessageRequired":"الرجاء إدخال رسالة","passwordHint":"استخدم كلمة مرور تحتوي على أحرف لأفضل أمان"}};
+const translations={
+  "fr":{
+    "modalTitle":"Comment utiliser ce logiciel",
+    "modalText":"Pour utiliser ce logiciel, commencez par saisir un mot de passe secret à partager avec votre destinataire. Entrez ensuite le message à crypter, copiez le message crypté, puis envoyez-le avec le mot de passe afin que votre destinataire puisse le décrypter.",
+    "dontShowLabel":"Ne plus afficher ce message",
+    "modalOk":"Compris",
+    "passwordLabel":"Mot de passe secret",
+    "passwordPlaceholder":"Entrez votre mot de passe ici",
+    "continueBtn":"Continuer vers le cryptage",
+    "messageLabel":"Message à crypter/décrypter",
+    "messagePlaceholder":"Entrez votre message ici",
+    "resultLabel":"Résultat",
+    "copyLabel":"Copier le résultat",
+    "encodeLabel":"Crypter",
+    "decodeLabel":"Décrypter",
+    "backLabel":"Retour au mot de passe",
+    "statusCopied":"Texte copié avec succès!",
+    "statusEncoded":"Message crypté avec succès!",
+    "statusDecoded":"Message décrypté avec succès!",
+    "statusPasswordRequired":"Veuillez entrer un mot de passe",
+    "statusMessageRequired":"Veuillez entrer un message",
+    "passwordHint":"Utilisez un mot de passe avec des lettres pour une sécurité optimale"
+  },
+  "en":{
+    "modalTitle":"How to use this software",
+    "modalText":"To use this software, start by entering a secret password to share with your recipient. Then enter the message to encrypt, copy the encrypted message, and send it with the password so your recipient can decrypt it.",
+    "dontShowLabel":"Don't show this message again",
+    "modalOk":"Got it",
+    "passwordLabel":"Secret password",
+    "passwordPlaceholder":"Enter your password here",
+    "continueBtn":"Continue to encryption",
+    "messageLabel":"Message to encrypt/decrypt",
+    "messagePlaceholder":"Enter your message here",
+    "resultLabel":"Result",
+    "copyLabel":"Copy result",
+    "encodeLabel":"Encrypt",
+    "decodeLabel":"Decrypt",
+    "backLabel":"Back to password",
+    "statusCopied":"Text copied successfully!",
+    "statusEncoded":"Message encrypted successfully!",
+    "statusDecoded":"Message decrypted successfully!",
+    "statusPasswordRequired":"Please enter a password",
+    "statusMessageRequired":"Please enter a message",
+    "passwordHint":"Use a password with letters for optimal security"
+  },
+  "es":{
+    "modalTitle":"Cómo utilizar este software",
+    "modalText":"Para usar este software, comience ingresando una contraseña secreta para compartir con su destinatario. Luego ingrese el mensaje a encriptar, copie el mensaje encriptado y envíelo con la contraseña para que su destinatario pueda desencriptarlo.",
+    "dontShowLabel":"No mostrar este mensaje nuevamente",
+    "modalOk":"Entendido",
+    "passwordLabel":"Contraseña secreta",
+    "passwordPlaceholder":"Ingrese su contraseña aquí",
+    "continueBtn":"Continuar al cifrado",
+    "messageLabel":"Mensaje para cifrar/descifrar",
+    "messagePlaceholder":"Ingrese su mensaje aquí",
+    "resultLabel":"Resultado",
+    "copyLabel":"Copiar resultado",
+    "encodeLabel":"Cifrar",
+    "decodeLabel":"Descifrar",
+    "backLabel":"Volver a la contraseña",
+    "statusCopied":"¡Texto copiado con éxito!",
+    "statusEncoded":"¡Mensaje cifrado con éxito!",
+    "statusDecoded":"¡Mensaje descifrado con éxito!",
+    "statusPasswordRequired":"Por favor ingrese una contraseña",
+    "statusMessageRequired":"Por favor ingrese un mensaje",
+    "passwordHint":"Use una contraseña con letras para una seguridad óptima"
+  },
+  "de":{
+    "modalTitle":"So verwenden Sie diese Software",
+    "modalText":"Um diese Software zu verwenden, geben Sie zunächst ein geheimes Passwort ein, das Sie mit Ihrem Empfänger teilen können. Geben Sie dann die zu verschlüsselnde Nachricht ein, kopieren Sie die verschlüsselte Nachricht und senden Sie sie mit dem Passwort, damit Ihr Empfänger sie entschlüsseln kann.",
+    "dontShowLabel":"Diese Nachricht nicht mehr anzeigen",
+    "modalOk":"Verstanden",
+    "passwordLabel":"Geheimes Passwort",
+    "passwordPlaceholder":"Geben Sie hier Ihr Passwort ein",
+    "continueBtn":"Zur Verschlüsselung fortfahren",
+    "messageLabel":"Zu verschlüsselnde/entschlüsselnde Nachricht",
+    "messagePlaceholder":"Geben Sie hier Ihre Nachricht ein",
+    "resultLabel":"Ergebnis",
+    "copyLabel":"Ergebnis kopieren",
+    "encodeLabel":"Verschlüsseln",
+    "decodeLabel":"Entschlüsseln",
+    "backLabel":"Zurück zum Passwort",
+    "statusCopied":"Text erfolgreich kopiert!",
+    "statusEncoded":"Nachricht erfolgreich verschlüsselt!",
+    "statusDecoded":"Nachricht erfolgreich entschlüsselt!",
+    "statusPasswordRequired":"Bitte geben Sie ein Passwort ein",
+    "statusMessageRequired":"Bitte geben Sie eine Nachricht ein",
+    "passwordHint":"Verwenden Sie ein Passwort mit Buchstaben für optimale Sicherheit"
+  },
+  "it":{
+    "modalTitle":"Come utilizzare questo software",
+    "modalText":"Per utilizzare questo software, inizia inserendo una password segreta da condividere con il tuo destinatario. Quindi inserisci il messaggio da crittografare, copia il messaggio crittografato e invialo con la password in modo che il tuo destinatario possa decrittografarlo.",
+    "dontShowLabel":"Non mostrare più questo messaggio",
+    "modalOk":"Capito",
+    "passwordLabel":"Password segreta",
+    "passwordPlaceholder":"Inserisci la tua password qui",
+    "continueBtn":"Continua alla crittografia",
+    "messageLabel":"Messaggio da crittografare/decrittografare",
+    "messagePlaceholder":"Inserisci il tuo messaggio aquí",
+    "resultLabel":"Risultato",
+    "copyLabel":"Copia risultato",
+    "encodeLabel":"Crittografa",
+    "decodeLabel":"Decrittografa",
+    "backLabel":"Torna alla password",
+    "statusCopied":"Testo copiato con successo!",
+    "statusEncoded":"Messaggio crittografato con successo!",
+    "statusDecoded":"Messaggio decrittografato con successo!",
+    "statusPasswordRequired":"Si prega di inserire una password",
+    "statusMessageRequired":"Si prega di inserire un messaggio",
+    "passwordHint":"Utilizza una password con lettere per una sicurezza ottimale"
+  },
+  "pt":{
+    "modalTitle":"Como usar este software",
+    "modalText":"Para usar este software, comece inserindo uma senha secreta para compartilhar com seu destinatário. Em seguida, insira a mensagem a ser criptografada, copie a mensagem criptografada e envie-a com a senha para que seu destinatário possa descriptografá-la.",
+    "dontShowLabel":"Não mostrar esta mensagem novamente",
+    "modalOk":"Entendido",
+    "passwordLabel":"Senha secreta",
+    "passwordPlaceholder":"Digite sua senha aqui",
+    "continueBtn":"Continuar para criptografia",
+    "messageLabel":"Mensagem para criptografar/descriptografar",
+    "messagePlaceholder":"Digite sua mensagem aqui",
+    "resultLabel":"Resultado",
+    "copyLabel":"Copiar resultado",
+    "encodeLabel":"Criptografar",
+    "decodeLabel":"Descriptografar",
+    "backLabel":"Voltar à senha",
+    "statusCopied":"Texto copiado com sucesso!",
+    "statusEncoded":"Mensagem criptografada com sucesso!",
+    "statusDecoded":"Mensagem descriptografada com sucesso!",
+    "statusPasswordRequired":"Por favor, insira uma senha",
+    "statusMessageRequired":"Por favor, digite uma mensagem",
+    "passwordHint":"Use uma senha com letras para segurança ideal"
+  },
+  "ru":{
+    "modalTitle":"Как использовать это программное обеспечение",
+    "modalText":"Чтобы использовать это программное обеспечение, начните с ввода секретного пароля, которым вы поделитесь с получателем. Затем введите сообщение для шифрования, скопируйте зашифрованное сообщение и отправьте его с паролем, чтобы получатель мог его расшифровать.",
+    "dontShowLabel":"Не показывать это сообщение снова",
+    "modalOk":"Понятно",
+    "passwordLabel":"Секретный пароль",
+    "passwordPlaceholder":"Введите ваш пароль здесь",
+    "continueBtn":"Перейти к шифрованию",
+    "messageLabel":"Сообщение для шифрования/дешифрования",
+    "messagePlaceholder":"Введите ваше сообщение здесь",
+    "resultLabel":"Результат",
+    "copyLabel":"Копировать результат",
+    "encodeLabel":"Зашифровать",
+    "decodeLabel":"Расшифровать",
+    "backLabel":"Вернуться к паролю",
+    "statusCopied":"Текст успешно скопирован!",
+    "statusEncoded":"Сообщение успешно зашифровано!",
+    "statusDecoded":"Сообщение успешно расшифровано!",
+    "statusPasswordRequired":"Пожалуйста, введите пароль",
+    "statusMessageRequired":"Пожалуйста, введите сообщение",
+    "passwordHint":"Используйте пароль с буквами для оптимальной безопасности"
+  },
+  "zh":{
+    "modalTitle":"如何使用此软件",
+    "modalText":"要使用此软件，请首先输入要与收件人共享的密码。然后输入要加密的消息，复制加密的消息，并将其与密码一起发送，以便收件人可以解密它。",
+    "dontShowLabel":"不再显示此消息",
+    "modalOk":"知道了",
+    "passwordLabel":"秘密密码",
+    "passwordPlaceholder":"在此输入您的密码",
+    "continueBtn":"继续加密",
+    "messageLabel":"要加密/解密的消息",
+    "messagePlaceholder":"在此输入您的消息",
+    "resultLabel":"结果",
+    "copyLabel":"复制结果",
+    "encodeLabel":"加密",
+    "decodeLabel":"解密",
+    "backLabel":"返回密码",
+    "statusCopied":"文本复制成功！",
+    "statusEncoded":"消息加密成功！",
+    "statusDecoded":"消息解密成功！",
+    "statusPasswordRequired":"请输入密码",
+    "statusMessageRequired":"请输入消息",
+    "passwordHint":"使用带字母的密码以获得最佳安全性"
+  },
+  "ja":{
+    "modalTitle":"ソフトウェアの使用方法",
+    "modalText":"このソフトウェアを使用するには、まず受信者と共有する秘密のパスワードを入力します。次に、暗号化するメッセージを入力し、暗号化されたメッセージをコピーして、受信者が復号できるようにパスワードと一緒に送信します。",
+    "dontShowLabel":"このメッセージを再表示しない",
+    "modalOk":"了解しました",
+    "passwordLabel":"秘密のパスワード",
+    "passwordPlaceholder":"ここにパスワードを入力してください",
+    "continueBtn":"暗号化に進む",
+    "messageLabel":"暗号化/復号するメッセージ",
+    "messagePlaceholder":"ここにメッセージを入力してください",
+    "resultLabel":"結果",
+    "copyLabel":"結果をコピー",
+    "encodeLabel":"暗号化",
+    "decodeLabel":"復号",
+    "backLabel":"パスワードに戻る",
+    "statusCopied":"テキストが正常にコピーされました！",
+    "statusEncoded":"メッセージが正常に暗号化されました！",
+    "statusDecoded":"メッセージが正常に復号されました！",
+    "statusPasswordRequired":"パスワードを入力してください",
+    "statusMessageRequired":"メッセージを入力してください",
+    "passwordHint":"最適なセキュリティのために文字を含むパスワードを使用してください"
+  },
+  "ar":{
+    "modalTitle":"كيفية استخدام هذا البرنامج",
+    "modalText":"لاستخدام هذا البرنامج، ابدأ بإدخال كلمة مرور سرية لمشاركتها مع المستلم. ثم أدخل الرسالة المراد تشفيرها، وانسخ الرسالة المشفرة، وأرسلها مع كلمة المرور حتى يتمكن المستلم من فك تشفيرها.",
+    "dontShowLabel":"عدم إظهار هذه الرسالة مرة أخرى",
+    "modalOk":"فهمت",
+    "passwordLabel":"كلمة مرور سرية",
+    "passwordPlaceholder":"أدخل كلمة المرور هنا",
+    "continueBtn":"المتابعة إلى التشفير",
+    "messageLabel":"رسالة للتشفير/فك التشفير",
+    "messagePlaceholder":"أدخل رسالتك هنا",
+    "resultLabel":"النتيجة",
+    "copyLabel":"نسخ النتيجة",
+    "encodeLabel":"تشفير",
+    "decodeLabel":"فك التشفير",
+    "backLabel":"العودة إلى كلمة المرور",
+    "statusCopied":"تم نسخ النص بنجاح!",
+    "statusEncoded":"تم تشفير الرسالة بنجاح!",
+    "statusDecoded":"تم فك تشفير الرسالة بنجاح!",
+    "statusPasswordRequired":"الرجاء إدخال كلمة مرور",
+    "statusMessageRequired":"الرجاء إدخال رسالة",
+    "passwordHint":"استخدم كلمة مرور تحتوي على أحرف لأفضل أمان"
+  }
+};
 
 // Updated language list with native names and sorted alphabetically
 const googleTranslateLanguages = [
@@ -242,6 +459,7 @@ googleTranslateLanguages.sort((a, b) => a.name.localeCompare(b.name));
 const languageDataBase={"en":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|"}},"fr":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸÆŒ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","À":"α","Â":"β","Ä":"γ","Ç":"δ","É":"ε","È":"ζ","Ê":"η","Ë":"θ","Î":"ι","Ï":"κ","Ô":"λ","Ö":"μ","Ù":"ν","Û":"ξ","Ü":"ο","Ÿ":"π","Æ":"ρ","Œ":"σ"}},"es":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZÑÁÉÍÓÚÜ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","Ñ":"α","Á":"β","É":"γ","Í":"δ","Ó":"ε","Ú":"ζ","Ü":"η"}},"de":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","Ä":"α","Ö":"β","Ü":"γ","ẞ":"δ"}},"it":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÌÍÎÓÒÙ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","À":"α","È":"β","É":"γ","Ì":"δ","Í":"ε","Î":"ζ","Ó":"η","Ò":"θ","Ù":"ι"}},"pt":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZÇÁÀÂÃÉÊÍÓÔÕÚ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","Ç":"α","Á":"β","À":"γ","Â":"δ","Ã":"ε","É":"ζ","Ê":"η","Í":"θ","Ó":"ι","Ô":"κ","Õ":"λ","Ú":"μ"}},"ru":{"alphabet":"АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ","symbolMap":{"А":"+","Б":"#","В":"°","Г":"√","Д":"\\","Е":"™","Ё":"]","Ж":"÷","З":"π","И":"{","Й":"&","К":"^","Л":"§","М":"¥","Н":"∆","О":"£","П":"¢","Р":"%","С":"~","Т":"©","У":"-","Ф":"•","Х":"€","Ц":"®","Ч":"✓","Ш":"|","Щ":"α","Ъ":"β","Ы":"γ","Ь":"δ","Э":"ε","Ю":"ζ","Я":"η"}},"zh":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZĀÁǍÀĒÉĚÈĪÍǏÌŌÓǑÒŪÚǓÙǕǗǙǛ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","Ā":"α","Á":"β","Ǎ":"γ","À":"δ","Ē":"ε","É":"ζ","Ě":"η","È":"θ","Ī":"ι","Í":"κ","Ǐ":"λ","Ì":"μ","Ō":"ν","Ó":"ξ","Ǒ":"ο","Ò":"π","Ū":"ρ","Ú":"σ","Ǔ":"τ","Ù":"υ","Ǖ":"φ","Ǘ":"χ","Ǚ":"ψ","Ǜ":"ω"}},"ja":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZĀĒĪŌŪ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","Ā":"α","Ē":"β","Ī":"γ","Ō":"δ","Ū":"ε"}},"ar":{"alphabet":"ابتثجحخدذرزسشصضطظعغفقكلمنهوي","symbolMap":{"ا":"+","ب":"#","ت":"°","ث":"√","ج":"\\","ح":"™","خ":"]","د":"÷","ذ":"π","ر":"{","ز":"&","س":"^","ش":"§","ص":"¥","ض":"∆","ط":"£","ظ":"¢","ع":"%","غ":"~","ف":"©","ق":"-","ك":"•","ل":"€","م":"®","ن":"✓","ه":"|","و":"α","ي":"β"}}};
 let currentPassword='';
 let currentLang='fr';
+
 function gcd(a,b){if(b===0)return Math.abs(a);return gcd(b,a%b)}
 function getCoprimes(m){const c=[];for(let i=1;i<m;i++){if(gcd(i,m)===1)c.push(i)}return c}
 function modInverse(a,mod){a=((a%mod)+mod)%mod;for(let x=1;x<mod;x++){if((a*x)%mod===1)return x}return 1}
@@ -254,11 +472,194 @@ function buildLanguageMapping(code){const alphabetArr=dynamicAlphabetForLanguage
 function calculateAB(password,alphabetSize){let firstLetterValue=3;let total=0;let hasLetters=false;const alphabetArr=dynamicAlphabetForLanguage(currentLang);for(const ch of password){let idx=alphabetArr.indexOf(ch);if(idx!==-1){if(!hasLetters){firstLetterValue=idx;hasLetters=true}total+=idx;continue}const up=alphabetArr.indexOf(ch.toUpperCase());const low=alphabetArr.indexOf(ch.toLowerCase());if(up!==-1){if(!hasLetters){firstLetterValue=up;hasLetters=true}total+=up;continue}if(low!==-1){if(!hasLetters){firstLetterValue=low;hasLetters=true}total+=low;continue}if(/[0-9]/.test(ch)){total+=parseInt(ch,10)}else{total+=ch.charCodeAt(0)%alphabetSize}}const coprimes=getCoprimes(alphabetSize);if(coprimes.length===0)return {a:1,b:total%alphabetSize};const a=coprimes[firstLetterValue%coprimes.length];const b=total%alphabetSize;return {a,b}}
 function encode(text,password){const mapping=buildLanguageMapping(currentLang);const alphabetArr=mapping.alphabet;const alphabetSize=alphabetArr.length;const {a,b}=calculateAB(password,alphabetSize);let result='';const symbolMap=mapping.symbolMap;for(const ch of text){let index=alphabetArr.indexOf(ch);if(index===-1){const up=alphabetArr.indexOf(ch.toUpperCase());const low=alphabetArr.indexOf(ch.toLowerCase());index=(up!==-1?up:(low!==-1?low:-1))}if(index!==-1){const x=index;const y=(a*x+b)%alphabetSize;const codedLetter=alphabetArr[y];const sym=symbolMap[codedLetter];result+= (sym!==undefined && sym!==null)?sym:codedLetter}else{result+=ch}}return result}
 function decode(text,password){const mapping=buildLanguageMapping(currentLang);const alphabetArr=mapping.alphabet;const alphabetSize=alphabetArr.length;const {a,b}=calculateAB(password,alphabetSize);const aInv=modInverse(a,alphabetSize);const reverseSymbolMap={};for(const [k,v] of Object.entries(mapping.symbolMap)){reverseSymbolMap[v]=k}let result='';for(const ch of text){if(reverseSymbolMap[ch]){const codedLetter=reverseSymbolMap[ch];const y=alphabetArr.indexOf(codedLetter);if(y!==-1){let x=(aInv*(y-b))%alphabetSize;if(x<0)x+=alphabetSize;result+=alphabetArr[x]}else{result+=ch}}else{result+=ch}}return result}
-function applyTranslations(lang){currentLang=lang;const t=translations[lang]||translations['en'];document.getElementById('modalTitle').textContent=t.modalTitle;document.getElementById('modalText').textContent=t.modalText;document.getElementById('dontShowLabel').textContent=t.dontShowLabel;document.getElementById('passwordLabel').textContent=t.passwordLabel;document.getElementById('password').placeholder=t.passwordPlaceholder;document.getElementById('continueBtn').innerHTML=t.continueBtn;document.getElementById('appInfo').textContent=t.appInfo;document.getElementById('messageLabel').textContent=t.messageLabel;document.getElementById('message').placeholder=t.messagePlaceholder;document.getElementById('resultLabel').textContent=t.resultLabel;document.getElementById('copyLabel').textContent=t.copyLabel;document.getElementById('encodeLabel').textContent=t.encodeLabel;document.getElementById('decodeLabel').textContent=t.decodeLabel;document.getElementById('backLabel').textContent=t.backLabel;document.getElementById('passwordHint').textContent=t.passwordHint}
-function populateLanguageSelectors(){const headerSel=document.getElementById('langSelect');const modalSel=document.getElementById('modalLangSelect');headerSel.innerHTML='';modalSel.innerHTML='';for(const item of googleTranslateLanguages){const opt1=document.createElement('option');opt1.value=item.code;opt1.textContent=item.name;headerSel.appendChild(opt1);const opt2=document.createElement('option');opt2.value=item.code;opt2.textContent=item.name;modalSel.appendChild(opt2)}if([...headerSel.options].some(o=>o.value===currentLang)===false)currentLang='fr';headerSel.value=currentLang;modalSel.value=currentLang;headerSel.addEventListener('change',function(){const lang=this.value;modalSel.value=lang;applyTranslations(lang)});modalSel.addEventListener('change',function(){const lang=this.value;headerSel.value=lang;applyTranslations(lang)})}
-function checkPasswordStrength(password){let strength=0;if(password.length>0)strength+=20;if(password.length>5)strength+=20;if(/[a-zA-Z]/.test(password))strength+=20;if(/[0-9]/.test(password))strength+=20;if(/[^a-zA-Z0-9]/.test(password))strength+=20;document.getElementById('passwordStrength').style.width=strength+'%'}
-function showStatus(message,type){const statusEl=document.getElementById('status');statusEl.textContent=message;statusEl.className='status '+type;setTimeout(()=>{statusEl.textContent='';statusEl.className='status'},3000)}
-document.addEventListener('DOMContentLoaded',function(){populateLanguageSelectors();if(localStorage.getItem('hidePrompt')!=='true'){document.getElementById('instructionModal').style.display='flex'}document.getElementById('password').value='';document.getElementById('message').value='';document.getElementById('result').innerText='';document.getElementById('password').addEventListener('input',function(){checkPasswordStrength(this.value)});applyTranslations(currentLang);document.getElementById('modalOk').addEventListener('click',function(){if(document.getElementById('dontShowAgain').checked){localStorage.setItem('hidePrompt','true')}document.getElementById('instructionModal').style.display='none'});document.getElementById('continueBtn').addEventListener('click',function(){const password=document.getElementById('password').value;const t=translations[currentLang]||translations['en'];if(!password){showStatus(t.statusPasswordRequired,'error');return}currentPassword=password;document.getElementById('page1').classList.add('hidden');document.getElementById('page2').classList.remove('hidden');document.getElementById('message').focus()});document.getElementById('backBtn').addEventListener('click',function(){document.getElementById('page2').classList.add('hidden');document.getElementById('page1').classList.remove('hidden');document.getElementById('password').value='';document.getElementById('message').value='';document.getElementById('result').innerText='';document.getElementById('status').innerText='';document.getElementById('passwordStrength').style.width='0%';currentPassword=''});document.getElementById('copyBtn').addEventListener('click',function(){const result=document.getElementById('result').innerText;const t=translations[currentLang]||translations['en'];if(!result)return;const textArea=document.createElement('textarea');textArea.value=result;document.body.appendChild(textArea);textArea.select();try{const successful=document.execCommand('copy');if(successful)showStatus(t.statusCopied,'success');else showStatus(t.statusCopied,'error')}catch(err){showStatus(t.statusCopied+' '+err,'error')}document.body.removeChild(textArea)});document.getElementById('encodeBtn').addEventListener('click',function(){const message=document.getElementById('message').value;const t=translations[currentLang]||translations['en'];if(!message){showStatus(t.statusMessageRequired,'error');return}try{const encoded=encode(message,currentPassword);document.getElementById('result').innerText=encoded;showStatus(t.statusEncoded,'success')}catch(err){showStatus('Erreur de cryptage: '+(err.message||err),'error')}});document.getElementById('decodeBtn').addEventListener('click',function(){const message=document.getElementById('message').value;const t=translations[currentLang]||translations['en'];if(!message){showStatus(t.statusMessageRequired,'error');return}try{const decoded=decode(message,currentPassword);document.getElementById('result').innerText=decoded;showStatus(t.statusDecoded,'success')}catch(err){showStatus('Erreur de décryptage: '+(err.message||err),'error')}})});
+
+function applyTranslations(lang){
+    currentLang = lang;
+    const t = translations[lang] || translations['en'];
+    
+    // Update modal content
+    document.getElementById('modalTitle').textContent = t.modalTitle;
+    document.getElementById('modalText').textContent = t.modalText;
+    document.getElementById('dontShowLabel').textContent = t.dontShowLabel;
+    document.getElementById('modalOk').textContent = t.modalOk;
+    
+    // Update main app content
+    document.getElementById('passwordLabel').textContent = t.passwordLabel;
+    document.getElementById('password').placeholder = t.passwordPlaceholder;
+    document.getElementById('continueBtn').innerHTML = t.continueBtn;
+    document.getElementById('messageLabel').textContent = t.messageLabel;
+    document.getElementById('message').placeholder = t.messagePlaceholder;
+    document.getElementById('resultLabel').textContent = t.resultLabel;
+    document.getElementById('copyLabel').textContent = t.copyLabel;
+    document.getElementById('encodeLabel').textContent = t.encodeLabel;
+    document.getElementById('decodeLabel').textContent = t.decodeLabel;
+    document.getElementById('backLabel').textContent = t.backLabel;
+    document.getElementById('passwordHint').textContent = t.passwordHint;
+}
+
+function populateLanguageSelectors(){
+    const headerSel = document.getElementById('langSelect');
+    const modalSel = document.getElementById('modalLangSelect');
+    headerSel.innerHTML = '';
+    modalSel.innerHTML = '';
+    
+    for(const item of googleTranslateLanguages){
+        const opt1 = document.createElement('option');
+        opt1.value = item.code;
+        opt1.textContent = item.name;
+        headerSel.appendChild(opt1);
+        
+        const opt2 = document.createElement('option');
+        opt2.value = item.code;
+        opt2.textContent = item.name;
+        modalSel.appendChild(opt2);
+    }
+    
+    if([...headerSel.options].some(o => o.value === currentLang) === false) currentLang = 'fr';
+    headerSel.value = currentLang;
+    modalSel.value = currentLang;
+    
+    headerSel.addEventListener('change', function(){
+        const lang = this.value;
+        modalSel.value = lang;
+        applyTranslations(lang);
+    });
+    
+    modalSel.addEventListener('change', function(){
+        const lang = this.value;
+        headerSel.value = lang;
+        applyTranslations(lang);
+    });
+}
+
+function checkPasswordStrength(password){
+    let strength = 0;
+    if(password.length > 0) strength += 20;
+    if(password.length > 5) strength += 20;
+    if(/[a-zA-Z]/.test(password)) strength += 20;
+    if(/[0-9]/.test(password)) strength += 20;
+    if(/[^a-zA-Z0-9]/.test(password)) strength += 20;
+    document.getElementById('passwordStrength').style.width = strength + '%';
+}
+
+function showStatus(message, type){
+    const statusEl = document.getElementById('status');
+    statusEl.textContent = message;
+    statusEl.className = 'status ' + type;
+    setTimeout(() => {
+        statusEl.textContent = '';
+        statusEl.className = 'status';
+    }, 3000);
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+    populateLanguageSelectors();
+    
+    if(localStorage.getItem('hidePrompt') !== 'true'){
+        document.getElementById('instructionModal').style.display = 'flex';
+    }
+    
+    document.getElementById('password').value = '';
+    document.getElementById('message').value = '';
+    document.getElementById('result').innerText = '';
+    
+    document.getElementById('password').addEventListener('input', function(){
+        checkPasswordStrength(this.value);
+    });
+    
+    applyTranslations(currentLang);
+    
+    document.getElementById('modalOk').addEventListener('click', function(){
+        if(document.getElementById('dontShowAgain').checked){
+            localStorage.setItem('hidePrompt', 'true');
+        }
+        document.getElementById('instructionModal').style.display = 'none';
+    });
+    
+    document.getElementById('continueBtn').addEventListener('click', function(){
+        const password = document.getElementById('password').value;
+        const t = translations[currentLang] || translations['en'];
+        
+        if(!password){
+            showStatus(t.statusPasswordRequired, 'error');
+            return;
+        }
+        
+        currentPassword = password;
+        document.getElementById('page1').classList.add('hidden');
+        document.getElementById('page2').classList.remove('hidden');
+        document.getElementById('message').focus();
+    });
+    
+    document.getElementById('backBtn').addEventListener('click', function(){
+        document.getElementById('page2').classList.add('hidden');
+        document.getElementById('page1').classList.remove('hidden');
+        document.getElementById('password').value = '';
+        document.getElementById('message').value = '';
+        document.getElementById('result').innerText = '';
+        document.getElementById('status').innerText = '';
+        document.getElementById('passwordStrength').style.width = '0%';
+        currentPassword = '';
+    });
+    
+    document.getElementById('copyBtn').addEventListener('click', function(){
+        const result = document.getElementById('result').innerText;
+        const t = translations[currentLang] || translations['en'];
+        
+        if(!result) return;
+        
+        const textArea = document.createElement('textarea');
+        textArea.value = result;
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            const successful = document.execCommand('copy');
+            if(successful) showStatus(t.statusCopied, 'success');
+            else showStatus(t.statusCopied, 'error');
+        } catch(err) {
+            showStatus(t.statusCopied + ' ' + err, 'error');
+        }
+        
+        document.body.removeChild(textArea);
+    });
+    
+    document.getElementById('encodeBtn').addEventListener('click', function(){
+        const message = document.getElementById('message').value;
+        const t = translations[currentLang] || translations['en'];
+        
+        if(!message){
+            showStatus(t.statusMessageRequired, 'error');
+            return;
+        }
+        
+        try {
+            const encoded = encode(message, currentPassword);
+            document.getElementById('result').innerText = encoded;
+            showStatus(t.statusEncoded, 'success');
+        } catch(err) {
+            showStatus('Erreur de cryptage: ' + (err.message || err), 'error');
+        }
+    });
+    
+    document.getElementById('decodeBtn').addEventListener('click', function(){
+        const message = document.getElementById('message').value;
+        const t = translations[currentLang] || translations['en'];
+        
+        if(!message){
+            showStatus(t.statusMessageRequired, 'error');
+            return;
+        }
+        
+        try {
+            const decoded = decode(message, currentPassword);
+            document.getElementById('result').innerText = decoded;
+            showStatus(t.statusDecoded, 'success');
+        } catch(err) {
+            showStatus('Erreur de décryptage: ' + (err.message || err), 'error');
+        }
+    });
+});
 </script>
 </body>
 </html>

@@ -74,7 +74,7 @@ input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(
 <div class="container">
 <div class="crypto-animation"></div>
 <header>
-<h1>ARISTIDES_MENS</h1>
+<h1 id="appTitle">ARISTIDES_MENS</h1>
 <div class="language-container">
 <select id="langSelect" class="lang-select" aria-label="App language"></select>
 </div>
@@ -117,226 +117,236 @@ input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(
 </div>
 </div>
 <script>
-const translations={
-  "fr":{
-    "modalTitle":"Comment utiliser ce logiciel",
-    "modalText":"Pour utiliser ce logiciel, commencez par saisir un mot de passe secret à partager avec votre destinataire. Entrez ensuite le message à crypter, copiez le message crypté, puis envoyez-le avec le mot de passe afin que votre destinataire puisse le décrypter.",
-    "dontShowLabel":"Ne plus afficher ce message",
-    "modalOk":"Compris",
-    "passwordLabel":"Mot de passe secret",
-    "passwordPlaceholder":"Entrez votre mot de passe ici",
-    "continueBtn":"Continuer vers le cryptage",
-    "messageLabel":"Message à crypter/décrypter",
-    "messagePlaceholder":"Entrez votre message ici",
-    "resultLabel":"Résultat",
-    "copyLabel":"Copier le résultat",
-    "encodeLabel":"Crypter",
-    "decodeLabel":"Décrypter",
-    "backLabel":"Retour au mot de passe",
-    "statusCopied":"Texte copié avec succès!",
-    "statusEncoded":"Message crypté avec succès!",
-    "statusDecoded":"Message décrypté avec succès!",
-    "statusPasswordRequired":"Veuillez entrer un mot de passe",
-    "statusMessageRequired":"Veuillez entrer un message",
-    "passwordHint":"Utilisez un mot de passe avec des lettres pour une sécurité optimale"
+const translations = {
+  "fr": {
+    "appTitle": "ARISTIDES_MENS",
+    "modalTitle": "Comment utiliser ce logiciel",
+    "modalText": "Pour utiliser ce logiciel, commencez par saisir un mot de passe secret à partager avec votre destinataire. Entrez ensuite le message à crypter, copiez le message crypté, puis envoyez-le avec le mot de passe afin que votre destinataire puisse le décrypter.",
+    "dontShowLabel": "Ne plus afficher ce message",
+    "modalOk": "Compris",
+    "passwordLabel": "Mot de passe secret",
+    "passwordPlaceholder": "Entrez votre mot de passe ici",
+    "continueBtn": "Continuer vers le cryptage",
+    "messageLabel": "Message à crypter/décrypter",
+    "messagePlaceholder": "Entrez votre message ici",
+    "resultLabel": "Résultat",
+    "copyLabel": "Copier le résultat",
+    "encodeLabel": "Crypter",
+    "decodeLabel": "Décrypter",
+    "backLabel": "Retour au mot de passe",
+    "statusCopied": "Texte copié avec succès!",
+    "statusEncoded": "Message crypté avec succès!",
+    "statusDecoded": "Message décrypté avec succès!",
+    "statusPasswordRequired": "Veuillez entrer un mot de passe",
+    "statusMessageRequired": "Veuillez entrer un message",
+    "passwordHint": "Utilisez un mot de passe avec des lettres et chiffres pour une sécurité optimale"
   },
-  "en":{
-    "modalTitle":"How to use this software",
-    "modalText":"To use this software, start by entering a secret password to share with your recipient. Then enter the message to encrypt, copy the encrypted message, and send it with the password so your recipient can decrypt it.",
-    "dontShowLabel":"Don't show this message again",
-    "modalOk":"Got it",
-    "passwordLabel":"Secret password",
-    "passwordPlaceholder":"Enter your password here",
-    "continueBtn":"Continue to encryption",
-    "messageLabel":"Message to encrypt/decrypt",
-    "messagePlaceholder":"Enter your message here",
-    "resultLabel":"Result",
-    "copyLabel":"Copy result",
-    "encodeLabel":"Encrypt",
-    "decodeLabel":"Decrypt",
-    "backLabel":"Back to password",
-    "statusCopied":"Text copied successfully!",
-    "statusEncoded":"Message encrypted successfully!",
-    "statusDecoded":"Message decrypted successfully!",
-    "statusPasswordRequired":"Please enter a password",
-    "statusMessageRequired":"Please enter a message",
-    "passwordHint":"Use a password with letters for optimal security"
+  "en": {
+    "appTitle": "ARISTIDES_MENS",
+    "modalTitle": "How to use this software",
+    "modalText": "To use this software, start by entering a secret password to share with your recipient. Then enter the message to encrypt, copy the encrypted message, and send it with the password so your recipient can decrypt it.",
+    "dontShowLabel": "Don't show this message again",
+    "modalOk": "Got it",
+    "passwordLabel": "Secret password",
+    "passwordPlaceholder": "Enter your password here",
+    "continueBtn": "Continue to encryption",
+    "messageLabel": "Message to encrypt/decrypt",
+    "messagePlaceholder": "Enter your message here",
+    "resultLabel": "Result",
+    "copyLabel": "Copy result",
+    "encodeLabel": "Encrypt",
+    "decodeLabel": "Decrypt",
+    "backLabel": "Back to password",
+    "statusCopied": "Text copied successfully!",
+    "statusEncoded": "Message encrypted successfully!",
+    "statusDecoded": "Message decrypted successfully!",
+    "statusPasswordRequired": "Please enter a password",
+    "statusMessageRequired": "Please enter a message",
+    "passwordHint": "Use a password with letters and numbers for optimal security"
   },
-  "es":{
-    "modalTitle":"Cómo utilizar este software",
-    "modalText":"Para usar este software, comience ingresando una contraseña secreta para compartir con su destinatario. Luego ingrese el mensaje a encriptar, copie el mensaje encriptado y envíelo con la contraseña para que su destinatario pueda desencriptarlo.",
-    "dontShowLabel":"No mostrar este mensaje nuevamente",
-    "modalOk":"Entendido",
-    "passwordLabel":"Contraseña secreta",
-    "passwordPlaceholder":"Ingrese su contraseña aquí",
-    "continueBtn":"Continuar al cifrado",
-    "messageLabel":"Mensaje para cifrar/descifrar",
-    "messagePlaceholder":"Ingrese su mensaje aquí",
-    "resultLabel":"Resultado",
-    "copyLabel":"Copiar resultado",
-    "encodeLabel":"Cifrar",
-    "decodeLabel":"Descifrar",
-    "backLabel":"Volver a la contraseña",
-    "statusCopied":"¡Texto copiado con éxito!",
-    "statusEncoded":"¡Mensaje cifrado con éxito!",
-    "statusDecoded":"¡Mensaje descifrado con éxito!",
-    "statusPasswordRequired":"Por favor ingrese una contraseña",
-    "statusMessageRequired":"Por favor ingrese un mensaje",
-    "passwordHint":"Use una contraseña con letras para una seguridad óptima"
+  "es": {
+    "appTitle": "ARISTIDES_MENS",
+    "modalTitle": "Cómo utilizar este software",
+    "modalText": "Para usar este software, comience ingresando una contraseña secreta para compartir con su destinatario. Luego ingrese el mensaje a encriptar, copie el mensaje encriptado y envíelo con la contraseña para que su destinatario pueda desencriptarlo.",
+    "dontShowLabel": "No mostrar este mensaje nuevamente",
+    "modalOk": "Entendido",
+    "passwordLabel": "Contraseña secreta",
+    "passwordPlaceholder": "Ingrese su contraseña aquí",
+    "continueBtn": "Continuar al cifrado",
+    "messageLabel": "Mensaje para cifrar/descifrar",
+    "messagePlaceholder": "Ingrese su mensaje aquí",
+    "resultLabel": "Resultado",
+    "copyLabel": "Copiar resultado",
+    "encodeLabel": "Cifrar",
+    "decodeLabel": "Descifrar",
+    "backLabel": "Volver a la contraseña",
+    "statusCopied": "¡Texto copiado con éxito!",
+    "statusEncoded": "¡Mensaje cifrado con éxito!",
+    "statusDecoded": "¡Mensaje descifrado con éxito!",
+    "statusPasswordRequired": "Por favor ingrese una contraseña",
+    "statusMessageRequired": "Por favor ingrese un mensaje",
+    "passwordHint": "Use una contraseña con letras y números para una seguridad óptima"
   },
-  "de":{
-    "modalTitle":"So verwenden Sie diese Software",
-    "modalText":"Um diese Software zu verwenden, geben Sie zunächst ein geheimes Passwort ein, das Sie mit Ihrem Empfänger teilen können. Geben Sie dann die zu verschlüsselnde Nachricht ein, kopieren Sie die verschlüsselte Nachricht und senden Sie sie mit dem Passwort, damit Ihr Empfänger sie entschlüsseln kann.",
-    "dontShowLabel":"Diese Nachricht nicht mehr anzeigen",
-    "modalOk":"Verstanden",
-    "passwordLabel":"Geheimes Passwort",
-    "passwordPlaceholder":"Geben Sie hier Ihr Passwort ein",
-    "continueBtn":"Zur Verschlüsselung fortfahren",
-    "messageLabel":"Zu verschlüsselnde/entschlüsselnde Nachricht",
-    "messagePlaceholder":"Geben Sie hier Ihre Nachricht ein",
-    "resultLabel":"Ergebnis",
-    "copyLabel":"Ergebnis kopieren",
-    "encodeLabel":"Verschlüsseln",
-    "decodeLabel":"Entschlüsseln",
-    "backLabel":"Zurück zum Passwort",
-    "statusCopied":"Text erfolgreich kopiert!",
-    "statusEncoded":"Nachricht erfolgreich verschlüsselt!",
-    "statusDecoded":"Nachricht erfolgreich entschlüsselt!",
-    "statusPasswordRequired":"Bitte geben Sie ein Passwort ein",
-    "statusMessageRequired":"Bitte geben Sie eine Nachricht ein",
-    "passwordHint":"Verwenden Sie ein Passwort mit Buchstaben für optimale Sicherheit"
+  "de": {
+    "appTitle": "ARISTIDES_MENS",
+    "modalTitle": "So verwenden Sie diese Software",
+    "modalText": "Um diese Software zu verwenden, geben Sie zunächst ein geheimes Passwort ein, das Sie mit Ihrem Empfänger teilen können. Geben Sie dann die zu verschlüsselnde Nachricht ein, kopieren Sie die verschlüsselte Nachricht und senden Sie sie mit dem Passwort, damit Ihr Empfänger sie entschlüsseln kann.",
+    "dontShowLabel": "Diese Nachricht nicht mehr anzeigen",
+    "modalOk": "Verstanden",
+    "passwordLabel": "Geheimes Passwort",
+    "passwordPlaceholder": "Geben Sie hier Ihr Passwort ein",
+    "continueBtn": "Zur Verschlüsselung fortfahren",
+    "messageLabel": "Zu verschlüsselnde/entschlüsselnde Nachricht",
+    "messagePlaceholder": "Geben Sie hier Ihre Nachricht ein",
+    "resultLabel": "Ergebnis",
+    "copyLabel": "Ergebnis kopieren",
+    "encodeLabel": "Verschlüsseln",
+    "decodeLabel": "Entschlüsseln",
+    "backLabel": "Zurück zum Passwort",
+    "statusCopied": "Text erfolgreich kopiert!",
+    "statusEncoded": "Nachricht erfolgreich verschlüsselt!",
+    "statusDecoded": "Nachricht erfolgreich entschlüsselt!",
+    "statusPasswordRequired": "Bitte geben Sie ein Passwort ein",
+    "statusMessageRequired": "Bitte geben Sie eine Nachricht ein",
+    "passwordHint": "Verwenden Sie ein Passwort mit Buchstaben und Zahlen für optimale Sicherheit"
   },
-  "it":{
-    "modalTitle":"Come utilizzare questo software",
-    "modalText":"Per utilizzare questo software, inizia inserendo una password segreta da condividere con il tuo destinatario. Quindi inserisci il messaggio da crittografare, copia il messaggio crittografato e invialo con la password in modo che il tuo destinatario possa decrittografarlo.",
-    "dontShowLabel":"Non mostrare più questo messaggio",
-    "modalOk":"Capito",
-    "passwordLabel":"Password segreta",
-    "passwordPlaceholder":"Inserisci la tua password qui",
-    "continueBtn":"Continua alla crittografia",
-    "messageLabel":"Messaggio da crittografare/decrittografare",
-    "messagePlaceholder":"Inserisci il tuo messaggio aquí",
-    "resultLabel":"Risultato",
-    "copyLabel":"Copia risultato",
-    "encodeLabel":"Crittografa",
-    "decodeLabel":"Decrittografa",
-    "backLabel":"Torna alla password",
-    "statusCopied":"Testo copiato con successo!",
-    "statusEncoded":"Messaggio crittografato con successo!",
-    "statusDecoded":"Messaggio decrittografato con successo!",
-    "statusPasswordRequired":"Si prega di inserire una password",
-    "statusMessageRequired":"Si prega di inserire un messaggio",
-    "passwordHint":"Utilizza una password con lettere per una sicurezza ottimale"
+  "it": {
+    "appTitle": "ARISTIDES_MENS",
+    "modalTitle": "Come utilizzare questo software",
+    "modalText": "Per utilizzare questo software, inizia inserendo una password segreta da condividere con il tuo destinatario. Quindi inserisci il messaggio da crittografare, copia il messaggio crittografato e invialo con la password in modo che il tuo destinatario possa decrittografarlo.",
+    "dontShowLabel": "Non mostrare più questo messaggio",
+    "modalOk": "Capito",
+    "passwordLabel": "Password segreta",
+    "passwordPlaceholder": "Inserisci la tua password qui",
+    "continueBtn": "Continua alla crittografia",
+    "messageLabel": "Messaggio da crittografare/decrittografare",
+    "messagePlaceholder": "Inserisci il tuo messaggio aquí",
+    "resultLabel": "Risultato",
+    "copyLabel": "Copia risultato",
+    "encodeLabel": "Crittografa",
+    "decodeLabel": "Decrittografa",
+    "backLabel": "Torna alla password",
+    "statusCopied": "Testo copiato con successo!",
+    "statusEncoded": "Messaggio crittografato con successo!",
+    "statusDecoded": "Messaggio decrittografato con successo!",
+    "statusPasswordRequired": "Si prega di inserire una password",
+    "statusMessageRequired": "Si prega di inserire un messaggio",
+    "passwordHint": "Utilizza una password con lettere e numeri per una sicurezza ottimale"
   },
-  "pt":{
-    "modalTitle":"Como usar este software",
-    "modalText":"Para usar este software, comece inserindo uma senha secreta para compartilhar com seu destinatário. Em seguida, insira a mensagem a ser criptografada, copie a mensagem criptografada e envie-a com a senha para que seu destinatário possa descriptografá-la.",
-    "dontShowLabel":"Não mostrar esta mensagem novamente",
-    "modalOk":"Entendido",
-    "passwordLabel":"Senha secreta",
-    "passwordPlaceholder":"Digite sua senha aqui",
-    "continueBtn":"Continuar para criptografia",
-    "messageLabel":"Mensagem para criptografar/descriptografar",
-    "messagePlaceholder":"Digite sua mensagem aqui",
-    "resultLabel":"Resultado",
-    "copyLabel":"Copiar resultado",
-    "encodeLabel":"Criptografar",
-    "decodeLabel":"Descriptografar",
-    "backLabel":"Voltar à senha",
-    "statusCopied":"Texto copiado com sucesso!",
-    "statusEncoded":"Mensagem criptografada com sucesso!",
-    "statusDecoded":"Mensagem descriptografada com sucesso!",
-    "statusPasswordRequired":"Por favor, insira uma senha",
-    "statusMessageRequired":"Por favor, digite uma mensagem",
-    "passwordHint":"Use uma senha com letras para segurança ideal"
+  "pt": {
+    "appTitle": "ARISTIDES_MENS",
+    "modalTitle": "Como usar este software",
+    "modalText": "Para usar este software, comece inserindo uma senha secreta para compartilhar com seu destinatário. Em seguida, insira a mensagem a ser criptografada, copie a mensagem criptografada e envie-a com a senha para que seu destinatário possa descriptografá-la.",
+    "dontShowLabel": "Não mostrar esta mensagem novamente",
+    "modalOk": "Entendido",
+    "passwordLabel": "Senha secreta",
+    "passwordPlaceholder": "Digite sua senha aqui",
+    "continueBtn": "Continuar para criptografia",
+    "messageLabel": "Mensagem para criptografar/descriptografar",
+    "messagePlaceholder": "Digite sua mensagem aqui",
+    "resultLabel": "Resultado",
+    "copyLabel": "Copiar resultado",
+    "encodeLabel": "Criptografar",
+    "decodeLabel": "Descriptografar",
+    "backLabel": "Voltar à senha",
+    "statusCopied": "Texto copiado com sucesso!",
+    "statusEncoded": "Mensagem criptografada com sucesso!",
+    "statusDecoded": "Mensagem descriptografada com sucesso!",
+    "statusPasswordRequired": "Por favor, insira uma senha",
+    "statusMessageRequired": "Por favor, digite uma mensagem",
+    "passwordHint": "Use uma senha com letras e números para segurança ideal"
   },
-  "ru":{
-    "modalTitle":"Как использовать это программное обеспечение",
-    "modalText":"Чтобы использовать это программное обеспечение, начните с ввода секретного пароля, которым вы поделитесь с получателем. Затем введите сообщение для шифрования, скопируйте зашифрованное сообщение и отправьте его с паролем, чтобы получатель мог его расшифровать.",
-    "dontShowLabel":"Не показывать это сообщение снова",
-    "modalOk":"Понятно",
-    "passwordLabel":"Секретный пароль",
-    "passwordPlaceholder":"Введите ваш пароль здесь",
-    "continueBtn":"Перейти к шифрованию",
-    "messageLabel":"Сообщение для шифрования/дешифрования",
-    "messagePlaceholder":"Введите ваше сообщение здесь",
-    "resultLabel":"Результат",
-    "copyLabel":"Копировать результат",
-    "encodeLabel":"Зашифровать",
-    "decodeLabel":"Расшифровать",
-    "backLabel":"Вернуться к паролю",
-    "statusCopied":"Текст успешно скопирован!",
-    "statusEncoded":"Сообщение успешно зашифровано!",
-    "statusDecoded":"Сообщение успешно расшифровано!",
-    "statusPasswordRequired":"Пожалуйста, введите пароль",
-    "statusMessageRequired":"Пожалуйста, введите сообщение",
-    "passwordHint":"Используйте пароль с буквами для оптимальной безопасности"
+  "ru": {
+    "appTitle": "ARISTIDES_MENS",
+    "modalTitle": "Как использовать это программное обеспечение",
+    "modalText": "Чтобы использовать это программное обеспечение, начните с ввода секретного пароля, которым вы поделитесь с получателем. Затем введите сообщение для шифрования, скопируйте зашифрованное сообщение и отправьте его с паролем, чтобы получатель мог его расшифровать.",
+    "dontShowLabel": "Не показывать это сообщение снова",
+    "modalOk": "Понятно",
+    "passwordLabel": "Секретный пароль",
+    "passwordPlaceholder": "Введите ваш пароль здесь",
+    "continueBtn": "Перейти к шифрованию",
+    "messageLabel": "Сообщение для шифрования/дешифрования",
+    "messagePlaceholder": "Введите ваше сообщение здесь",
+    "resultLabel": "Результат",
+    "copyLabel": "Копировать результат",
+    "encodeLabel": "Зашифровать",
+    "decodeLabel": "Расшифровать",
+    "backLabel": "Вернуться к паролю",
+    "statusCopied": "Текст успешно скопирован!",
+    "statusEncoded": "Сообщение успешно зашифровано!",
+    "statusDecoded": "Сообщение успешно расшифровано!",
+    "statusPasswordRequired": "Пожалуйста, введите пароль",
+    "statusMessageRequired": "Пожалуйста, введите сообщение",
+    "passwordHint": "Используйте пароль с буквами и цифрами для оптимальной безопасности"
   },
-  "zh":{
-    "modalTitle":"如何使用此软件",
-    "modalText":"要使用此软件，请首先输入要与收件人共享的密码。然后输入要加密的消息，复制加密的消息，并将其与密码一起发送，以便收件人可以解密它。",
-    "dontShowLabel":"不再显示此消息",
-    "modalOk":"知道了",
-    "passwordLabel":"秘密密码",
-    "passwordPlaceholder":"在此输入您的密码",
-    "continueBtn":"继续加密",
-    "messageLabel":"要加密/解密的消息",
-    "messagePlaceholder":"在此输入您的消息",
-    "resultLabel":"结果",
-    "copyLabel":"复制结果",
-    "encodeLabel":"加密",
-    "decodeLabel":"解密",
-    "backLabel":"返回密码",
-    "statusCopied":"文本复制成功！",
-    "statusEncoded":"消息加密成功！",
-    "statusDecoded":"消息解密成功！",
-    "statusPasswordRequired":"请输入密码",
-    "statusMessageRequired":"请输入消息",
-    "passwordHint":"使用带字母的密码以获得最佳安全性"
+  "zh": {
+    "appTitle": "ARISTIDES_MENS",
+    "modalTitle": "如何使用此软件",
+    "modalText": "要使用此软件，请首先输入要与收件人共享的密码。然后输入要加密的消息，复制加密的消息，并将其与密码一起发送，以便收件人可以解密它。",
+    "dontShowLabel": "不再显示此消息",
+    "modalOk": "知道了",
+    "passwordLabel": "秘密密码",
+    "passwordPlaceholder": "在此输入您的密码",
+    "continueBtn": "继续加密",
+    "messageLabel": "要加密/解密的消息",
+    "messagePlaceholder": "在此输入您的消息",
+    "resultLabel": "结果",
+    "copyLabel": "复制结果",
+    "encodeLabel": "加密",
+    "decodeLabel": "解密",
+    "backLabel": "返回密码",
+    "statusCopied": "文本复制成功！",
+    "statusEncoded": "消息加密成功！",
+    "statusDecoded": "消息解密成功！",
+    "statusPasswordRequired": "请输入密码",
+    "statusMessageRequired": "请输入消息",
+    "passwordHint": "使用带字母和数字的密码以获得最佳安全性"
   },
-  "ja":{
-    "modalTitle":"ソフトウェアの使用方法",
-    "modalText":"このソフトウェアを使用するには、まず受信者と共有する秘密のパスワードを入力します。次に、暗号化するメッセージを入力し、暗号化されたメッセージをコピーして、受信者が復号できるようにパスワードと一緒に送信します。",
-    "dontShowLabel":"このメッセージを再表示しない",
-    "modalOk":"了解しました",
-    "passwordLabel":"秘密のパスワード",
-    "passwordPlaceholder":"ここにパスワードを入力してください",
-    "continueBtn":"暗号化に進む",
-    "messageLabel":"暗号化/復号するメッセージ",
-    "messagePlaceholder":"ここにメッセージを入力してください",
-    "resultLabel":"結果",
-    "copyLabel":"結果をコピー",
-    "encodeLabel":"暗号化",
-    "decodeLabel":"復号",
-    "backLabel":"パスワードに戻る",
-    "statusCopied":"テキストが正常にコピーされました！",
-    "statusEncoded":"メッセージが正常に暗号化されました！",
-    "statusDecoded":"メッセージが正常に復号されました！",
-    "statusPasswordRequired":"パスワードを入力してください",
-    "statusMessageRequired":"メッセージを入力してください",
-    "passwordHint":"最適なセキュリティのために文字を含むパスワードを使用してください"
+  "ja": {
+    "appTitle": "ARISTIDES_MENS",
+    "modalTitle": "ソフトウェアの使用方法",
+    "modalText": "このソフトウェアを使用するには、まず受信者と共有する秘密のパスワードを入力します。次に、暗号化するメッセージを入力し、暗号化されたメッセージをコピーして、受信者が復号できるようにパスワードと一緒に送信します。",
+    "dontShowLabel": "このメッセージを再表示しない",
+    "modalOk": "了解しました",
+    "passwordLabel": "秘密のパスワード",
+    "passwordPlaceholder": "ここにパスワードを入力してください",
+    "continueBtn": "暗号化に進む",
+    "messageLabel": "暗号化/復号するメッセージ",
+    "messagePlaceholder": "ここにメッセージを入力してください",
+    "resultLabel": "結果",
+    "copyLabel": "結果をコピー",
+    "encodeLabel": "暗号化",
+    "decodeLabel": "復号",
+    "backLabel": "パスワードに戻る",
+    "statusCopied": "テキストが正常にコピーされました！",
+    "statusEncoded": "メッセージが正常に暗号化されました！",
+    "statusDecoded": "メッセージが正常に復号されました！",
+    "statusPasswordRequired": "パスワードを入力してください",
+    "statusMessageRequired": "メッセージを入力してください",
+    "passwordHint": "最適なセキュリティのために文字と数字を含むパスワードを使用してください"
   },
-  "ar":{
-    "modalTitle":"كيفية استخدام هذا البرنامج",
-    "modalText":"لاستخدام هذا البرنامج، ابدأ بإدخال كلمة مرور سرية لمشاركتها مع المستلم. ثم أدخل الرسالة المراد تشفيرها، وانسخ الرسالة المشفرة، وأرسلها مع كلمة المرور حتى يتمكن المستلم من فك تشفيرها.",
-    "dontShowLabel":"عدم إظهار هذه الرسالة مرة أخرى",
-    "modalOk":"فهمت",
-    "passwordLabel":"كلمة مرور سرية",
-    "passwordPlaceholder":"أدخل كلمة المرور هنا",
-    "continueBtn":"المتابعة إلى التشفير",
-    "messageLabel":"رسالة للتشفير/فك التشفير",
-    "messagePlaceholder":"أدخل رسالتك هنا",
-    "resultLabel":"النتيجة",
-    "copyLabel":"نسخ النتيجة",
-    "encodeLabel":"تشفير",
-    "decodeLabel":"فك التشفير",
-    "backLabel":"العودة إلى كلمة المرور",
-    "statusCopied":"تم نسخ النص بنجاح!",
-    "statusEncoded":"تم تشفير الرسالة بنجاح!",
-    "statusDecoded":"تم فك تشفير الرسالة بنجاح!",
-    "statusPasswordRequired":"الرجاء إدخال كلمة مرور",
-    "statusMessageRequired":"الرجاء إدخال رسالة",
-    "passwordHint":"استخدم كلمة مرور تحتوي على أحرف لأفضل أمان"
+  "ar": {
+    "appTitle": "ARISTIDES_MENS",
+    "modalTitle": "كيفية استخدام هذا البرنامج",
+    "modalText": "لاستخدام هذا البرنامج، ابدأ بإدخال كلمة مرور سرية لمشاركتها مع المستلم. ثم أدخل الرسالة المراد تشفيرها، وانسخ الرسالة المشفرة، وأرسلها مع كلمة المرور حتى يتمكن المستلم من فك تشفيرها.",
+    "dontShowLabel": "عدم إظهار هذه الرسالة مرة أخرى",
+    "modalOk": "فهمت",
+    "passwordLabel": "كلمة مرور سرية",
+    "passwordPlaceholder": "أدخل كلمة المرور هنا",
+    "continueBtn": "المتابعة إلى التشفير",
+    "messageLabel": "رسالة للتشفير/فك التشفير",
+    "messagePlaceholder": "أدخل رسالتك هنا",
+    "resultLabel": "النتيجة",
+    "copyLabel": "نسخ النتيجة",
+    "encodeLabel": "تشفير",
+    "decodeLabel": "فك التشفير",
+    "backLabel": "العودة إلى كلمة المرور",
+    "statusCopied": "تم نسخ النص بنجاح!",
+    "statusEncoded": "تم تشفير الرسالة بنجاح!",
+    "statusDecoded": "تم فك تشفير الرسالة بنجاح!",
+    "statusPasswordRequired": "الرجاء إدخال كلمة مرور",
+    "statusMessageRequired": "الرجاء إدخال رسالة",
+    "passwordHint": "استخدم كلمة مرور تحتوي على أحرف وأرقام لأفضل أمان"
   }
 };
 
@@ -456,26 +466,318 @@ const googleTranslateLanguages = [
 // Sort the languages alphabetically by their native names
 googleTranslateLanguages.sort((a, b) => a.name.localeCompare(b.name));
 
-const languageDataBase={"en":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|"}},"fr":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸÆŒ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","À":"α","Â":"β","Ä":"γ","Ç":"δ","É":"ε","È":"ζ","Ê":"η","Ë":"θ","Î":"ι","Ï":"κ","Ô":"λ","Ö":"μ","Ù":"ν","Û":"ξ","Ü":"ο","Ÿ":"π","Æ":"ρ","Œ":"σ"}},"es":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZÑÁÉÍÓÚÜ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","Ñ":"α","Á":"β","É":"γ","Í":"δ","Ó":"ε","Ú":"ζ","Ü":"η"}},"de":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","Ä":"α","Ö":"β","Ü":"γ","ẞ":"δ"}},"it":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÌÍÎÓÒÙ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","À":"α","È":"β","É":"γ","Ì":"δ","Í":"ε","Î":"ζ","Ó":"η","Ò":"θ","Ù":"ι"}},"pt":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZÇÁÀÂÃÉÊÍÓÔÕÚ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","Ç":"α","Á":"β","À":"γ","Â":"δ","Ã":"ε","É":"ζ","Ê":"η","Í":"θ","Ó":"ι","Ô":"κ","Õ":"λ","Ú":"μ"}},"ru":{"alphabet":"АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ","symbolMap":{"А":"+","Б":"#","В":"°","Г":"√","Д":"\\","Е":"™","Ё":"]","Ж":"÷","З":"π","И":"{","Й":"&","К":"^","Л":"§","М":"¥","Н":"∆","О":"£","П":"¢","Р":"%","С":"~","Т":"©","У":"-","Ф":"•","Х":"€","Ц":"®","Ч":"✓","Ш":"|","Щ":"α","Ъ":"β","Ы":"γ","Ь":"δ","Э":"ε","Ю":"ζ","Я":"η"}},"zh":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZĀÁǍÀĒÉĚÈĪÍǏÌŌÓǑÒŪÚǓÙǕǗǙǛ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","Ā":"α","Á":"β","Ǎ":"γ","À":"δ","Ē":"ε","É":"ζ","Ě":"η","È":"θ","Ī":"ι","Í":"κ","Ǐ":"λ","Ì":"μ","Ō":"ν","Ó":"ξ","Ǒ":"ο","Ò":"π","Ū":"ρ","Ú":"σ","Ǔ":"τ","Ù":"υ","Ǖ":"φ","Ǘ":"χ","Ǚ":"ψ","Ǜ":"ω"}},"ja":{"alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZĀĒĪŌŪ","symbolMap":{"A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|","Ā":"α","Ē":"β","Ī":"γ","Ō":"δ","Ū":"ε"}},"ar":{"alphabet":"ابتثجحخدذرزسشصضطظعغفقكلمنهوي","symbolMap":{"ا":"+","ب":"#","ت":"°","ث":"√","ج":"\\","ح":"™","خ":"]","د":"÷","ذ":"π","ر":"{","ز":"&","س":"^","ش":"§","ص":"¥","ض":"∆","ط":"£","ظ":"¢","ع":"%","غ":"~","ف":"©","ق":"-","ك":"•","ل":"€","م":"®","ن":"✓","ه":"|","و":"α","ي":"β"}}};
-let currentPassword='';
-let currentLang='fr';
+// Updated language database with numbers and their symbols
+const languageDataBase = {
+  "en": {
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    "symbolMap": {
+      "A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|",
+      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+    }
+  },
+  "fr": {
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸÆŒ0123456789",
+    "symbolMap": {
+      "A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|",
+      "À":"α","Â":"β","Ä":"γ","Ç":"δ","É":"ε","È":"ζ","Ê":"η","Ë":"θ","Î":"ι","Ï":"κ","Ô":"λ","Ö":"μ","Ù":"ν","Û":"ξ","Ü":"ο","Ÿ":"π","Æ":"ρ","Œ":"σ",
+      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+    }
+  },
+  "es": {
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZÑÁÉÍÓÚÜ0123456789",
+    "symbolMap": {
+      "A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|",
+      "Ñ":"α","Á":"β","É":"γ","Í":"δ","Ó":"ε","Ú":"ζ","Ü":"η",
+      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+    }
+  },
+  "de": {
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞ0123456789",
+    "symbolMap": {
+      "A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|",
+      "Ä":"α","Ö":"β","Ü":"γ","ẞ":"δ",
+      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+    }
+  },
+  "it": {
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÌÍÎÓÒÙ0123456789",
+    "symbolMap": {
+      "A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|",
+      "À":"α","È":"β","É":"γ","Ì":"δ","Í":"ε","Î":"ζ","Ó":"η","Ò":"θ","Ù":"ι",
+      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+    }
+  },
+  "pt": {
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZÇÁÀÂÃÉÊÍÓÔÕÚ0123456789",
+    "symbolMap": {
+      "A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|",
+      "Ç":"α","Á":"β","À":"γ","Â":"δ","Ã":"ε","É":"ζ","Ê":"η","Í":"θ","Ó":"ι","Ô":"κ","Õ":"λ","Ú":"μ",
+      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+    }
+  },
+  "ru": {
+    "alphabet": "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789",
+    "symbolMap": {
+      "А":"+","Б":"#","В":"°","Г":"√","Д":"\\","Е":"™","Ё":"]","Ж":"÷","З":"π","И":"{","Й":"&","К":"^","Л":"§","М":"¥","Н":"∆","О":"£","П":"¢","Р":"%","С":"~","Т":"©","У":"-","Ф":"•","Х":"€","Ц":"®","Ч":"✓","Ш":"|",
+      "Щ":"α","Ъ":"β","Ы":"γ","Ь":"δ","Э":"ε","Ю":"ζ","Я":"η",
+      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+    }
+  },
+  "zh": {
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZĀÁǍÀĒÉĚÈĪÍǏÌŌÓǑÒŪÚǓÙǕǗǙǛ0123456789",
+    "symbolMap": {
+      "A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|",
+      "Ā":"α","Á":"β","Ǎ":"γ","À":"δ","Ē":"ε","É":"ζ","Ě":"η","È":"θ","Ī":"ι","Í":"κ","Ǐ":"λ","Ì":"μ","Ō":"ν","Ó":"ξ","Ǒ":"ο","Ò":"π","Ū":"ρ","Ú":"σ","Ǔ":"τ","Ù":"υ","Ǖ":"φ","Ǘ":"χ","Ǚ":"ψ","Ǜ":"ω",
+      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+    }
+  },
+  "ja": {
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZĀĒĪŌŪ0123456789",
+    "symbolMap": {
+      "A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|",
+      "Ā":"α","Ē":"β","Ī":"γ","Ō":"δ","Ū":"ε",
+      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+    }
+  },
+  "ar": {
+    "alphabet": "ابتثجحخدذرزسشصضطظعغفقكلمنهوي0123456789",
+    "symbolMap": {
+      "ا":"+","ب":"#","ت":"°","ث":"√","ج":"\\","ح":"™","خ":"]","د":"÷","ذ":"π","ر":"{","ز":"&","س":"^","ش":"§","ص":"¥","ض":"∆","ط":"£","ظ":"¢","ع":"%","غ":"~","ف":"©","ق":"-","ك":"•","ل":"€","م":"®","ن":"✓","ه":"|",
+      "و":"α","ي":"β",
+      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+    }
+  }
+};
 
-function gcd(a,b){if(b===0)return Math.abs(a);return gcd(b,a%b)}
-function getCoprimes(m){const c=[];for(let i=1;i<m;i++){if(gcd(i,m)===1)c.push(i)}return c}
-function modInverse(a,mod){a=((a%mod)+mod)%mod;for(let x=1;x<mod;x++){if((a*x)%mod===1)return x}return 1}
-function expandLanguageData(){for(const k of Object.keys(languageDataBase)){const data=languageDataBase[k];if(data.__expanded)continue;const upper=Array.from(data.alphabet);let lower=upper.map(ch=>{try{return ch.toLowerCase()}catch(e){return ch}});if(lower.join('')===upper.join(''))lower=upper.slice();data.alphabet=upper.join('')+lower.join('');if(!data.symbolMap)data.symbolMap={};const lowerSymbols=generateSymbolPool();for(let i=0;i<lower.length;i++){const low=lower[i];if(data.symbolMap[low])continue;const up=upper[i%upper.length];let candidate=lowerSymbols[i%lowerSymbols.length];if(candidate===data.symbolMap[up])candidate=lowerSymbols[(i+1)%lowerSymbols.length];data.symbolMap[low]=candidate}data.__expanded=true}}
-function generateSymbolPool(){const pool=[];for(let cp=0x2800;cp<=0x28FF;cp++){pool.push(String.fromCharCode(cp))}const extras=['✦','✧','✪','✫','✬','✭','✮','✯','★','☆','☉','☼','☀','☁','♫','♪','☾','☽','✶','✷'];for(const e of extras)pool.push(e);return pool}
-function generateLargeAlphabet(){const set=[];function addRange(a,b){for(let i=a;i<=b;i++){const ch=String.fromCharCode(i);if(/\p{L}/u.test(ch))set.push(ch)}}addRange(0x0041,0x024F);addRange(0x0370,0x03FF);addRange(0x0400,0x04FF);addRange(0x0530,0x058F);addRange(0x0590,0x05FF);addRange(0x0600,0x06FF);addRange(0x0900,0x097F);addRange(0x0980,0x09FF);addRange(0x0A00,0x0A7F);addRange(0x0B80,0x0BFF);addRange(0x0C00,0x0C7F);addRange(0x0C80,0x0CFF);addRange(0x0D00,0x0D7F);addRange(0x0E00,0x0E7F);addRange(0x10A0,0x10FF);for(let i=0x4E00;i<=0x4EFF;i++){const ch=String.fromCharCode(i);if(/\p{L}/u.test(ch))set.push(ch)}const uniq=[];for(const ch of set){if(!uniq.includes(ch))uniq.push(ch)}const upper=[];for(const ch of uniq){try{const u=ch.toUpperCase();const l=ch.toLowerCase();if(!upper.includes(u))upper.push(u);if(!upper.includes(l))upper.push(l)}catch(e){if(!upper.includes(ch))upper.push(ch)}}return upper}
-function dynamicAlphabetForLanguage(code){expandLanguageData();const base=languageDataBase[code];if(base) return base.alphabet.split('');const generated=generateLargeAlphabet();return generated}
-function generateSymbolForIndex(i){const pool=[];for(let cp=0x2800;cp<=0x28FF;cp++)pool.push(String.fromCharCode(cp));const extras=['✦','✧','✪','✫','✬','✭','✮','✯','★','☆','☉','☼','☀','☁','♫','♪','☾','☽','✶','✷'];for(const e of extras)pool.push(e);const p=pool.length;const q=Math.floor(i/p);const r=i%p;return (q===0)?pool[r]:(pool[r]+q.toString(36)) }
-function buildLanguageMapping(code){const alphabetArr=dynamicAlphabetForLanguage(code);const symbolMap={};for(let i=0;i<alphabetArr.length;i++){const ch=alphabetArr[i];if(languageDataBase[code]&&languageDataBase[code].symbolMap&&languageDataBase[code].symbolMap[ch]){symbolMap[ch]=languageDataBase[code].symbolMap[ch];continue}symbolMap[ch]=generateSymbolForIndex(i)}return {alphabet:alphabetArr,symbolMap}}
-function calculateAB(password,alphabetSize){let firstLetterValue=3;let total=0;let hasLetters=false;const alphabetArr=dynamicAlphabetForLanguage(currentLang);for(const ch of password){let idx=alphabetArr.indexOf(ch);if(idx!==-1){if(!hasLetters){firstLetterValue=idx;hasLetters=true}total+=idx;continue}const up=alphabetArr.indexOf(ch.toUpperCase());const low=alphabetArr.indexOf(ch.toLowerCase());if(up!==-1){if(!hasLetters){firstLetterValue=up;hasLetters=true}total+=up;continue}if(low!==-1){if(!hasLetters){firstLetterValue=low;hasLetters=true}total+=low;continue}if(/[0-9]/.test(ch)){total+=parseInt(ch,10)}else{total+=ch.charCodeAt(0)%alphabetSize}}const coprimes=getCoprimes(alphabetSize);if(coprimes.length===0)return {a:1,b:total%alphabetSize};const a=coprimes[firstLetterValue%coprimes.length];const b=total%alphabetSize;return {a,b}}
-function encode(text,password){const mapping=buildLanguageMapping(currentLang);const alphabetArr=mapping.alphabet;const alphabetSize=alphabetArr.length;const {a,b}=calculateAB(password,alphabetSize);let result='';const symbolMap=mapping.symbolMap;for(const ch of text){let index=alphabetArr.indexOf(ch);if(index===-1){const up=alphabetArr.indexOf(ch.toUpperCase());const low=alphabetArr.indexOf(ch.toLowerCase());index=(up!==-1?up:(low!==-1?low:-1))}if(index!==-1){const x=index;const y=(a*x+b)%alphabetSize;const codedLetter=alphabetArr[y];const sym=symbolMap[codedLetter];result+= (sym!==undefined && sym!==null)?sym:codedLetter}else{result+=ch}}return result}
-function decode(text,password){const mapping=buildLanguageMapping(currentLang);const alphabetArr=mapping.alphabet;const alphabetSize=alphabetArr.length;const {a,b}=calculateAB(password,alphabetSize);const aInv=modInverse(a,alphabetSize);const reverseSymbolMap={};for(const [k,v] of Object.entries(mapping.symbolMap)){reverseSymbolMap[v]=k}let result='';for(const ch of text){if(reverseSymbolMap[ch]){const codedLetter=reverseSymbolMap[ch];const y=alphabetArr.indexOf(codedLetter);if(y!==-1){let x=(aInv*(y-b))%alphabetSize;if(x<0)x+=alphabetSize;result+=alphabetArr[x]}else{result+=ch}}else{result+=ch}}return result}
+let currentPassword = '';
+let currentLang = 'fr';
 
-function applyTranslations(lang){
+// Mathematical functions
+function gcd(a, b) {
+    if (b === 0) return Math.abs(a);
+    return gcd(b, a % b);
+}
+
+function getCoprimes(m) {
+    const c = [];
+    for (let i = 1; i < m; i++) {
+        if (gcd(i, m) === 1) c.push(i);
+    }
+    return c;
+}
+
+function modInverse(a, mod) {
+    a = ((a % mod) + mod) % mod;
+    for (let x = 1; x < mod; x++) {
+        if ((a * x) % mod === 1) return x;
+    }
+    return 1;
+}
+
+// Expand language data to include lowercase letters
+function expandLanguageData() {
+    for (const k of Object.keys(languageDataBase)) {
+        const data = languageDataBase[k];
+        if (data.__expanded) continue;
+        
+        const upper = Array.from(data.alphabet);
+        let lower = upper.map(ch => {
+            try { return ch.toLowerCase(); } 
+            catch(e) { return ch; }
+        });
+        
+        if (lower.join('') === upper.join('')) lower = upper.slice();
+        
+        data.alphabet = upper.join('') + lower.join('');
+        
+        if (!data.symbolMap) data.symbolMap = {};
+        
+        const lowerSymbols = generateSymbolPool();
+        for (let i = 0; i < lower.length; i++) {
+            const low = lower[i];
+            if (data.symbolMap[low]) continue;
+            
+            const up = upper[i % upper.length];
+            let candidate = lowerSymbols[i % lowerSymbols.length];
+            
+            if (candidate === data.symbolMap[up]) {
+                candidate = lowerSymbols[(i + 1) % lowerSymbols.length];
+            }
+            
+            data.symbolMap[low] = candidate;
+        }
+        data.__expanded = true;
+    }
+}
+
+function generateSymbolPool() {
+    const pool = [];
+    for (let cp = 0x2800; cp <= 0x28FF; cp++) {
+        pool.push(String.fromCharCode(cp));
+    }
+    const extras = ['✦', '✧', '✪', '✫', '✬', '✭', '✮', '✯', '★', '☆', '☉', '☼', '☀', '☁', '♫', '♪', '☾', '☽', '✶', '✷'];
+    for (const e of extras) pool.push(e);
+    return pool;
+}
+
+function dynamicAlphabetForLanguage(code) {
+    expandLanguageData();
+    const base = languageDataBase[code];
+    if (base) return base.alphabet.split('');
+    
+    // Fallback: generate basic alphabet with numbers
+    const basicAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    return basicAlphabet.split('');
+}
+
+function buildLanguageMapping(code) {
+    const alphabetArr = dynamicAlphabetForLanguage(code);
+    const symbolMap = {};
+    
+    for (let i = 0; i < alphabetArr.length; i++) {
+        const ch = alphabetArr[i];
+        if (languageDataBase[code] && languageDataBase[code].symbolMap && languageDataBase[code].symbolMap[ch]) {
+            symbolMap[ch] = languageDataBase[code].symbolMap[ch];
+            continue;
+        }
+        // Fallback symbol generation
+        symbolMap[ch] = generateSymbolForIndex(i);
+    }
+    
+    return { alphabet: alphabetArr, symbolMap };
+}
+
+function generateSymbolForIndex(i) {
+    const pool = generateSymbolPool();
+    const p = pool.length;
+    const q = Math.floor(i / p);
+    const r = i % p;
+    return (q === 0) ? pool[r] : (pool[r] + q.toString(36));
+}
+
+function calculateAB(password, alphabetSize) {
+    let firstLetterValue = 3;
+    let total = 0;
+    let hasLetters = false;
+    const alphabetArr = dynamicAlphabetForLanguage(currentLang);
+    
+    for (const ch of password) {
+        let idx = alphabetArr.indexOf(ch);
+        if (idx !== -1) {
+            if (!hasLetters) {
+                firstLetterValue = idx;
+                hasLetters = true;
+            }
+            total += idx;
+            continue;
+        }
+        
+        const up = alphabetArr.indexOf(ch.toUpperCase());
+        const low = alphabetArr.indexOf(ch.toLowerCase());
+        
+        if (up !== -1) {
+            if (!hasLetters) {
+                firstLetterValue = up;
+                hasLetters = true;
+            }
+            total += up;
+            continue;
+        }
+        
+        if (low !== -1) {
+            if (!hasLetters) {
+                firstLetterValue = low;
+                hasLetters = true;
+            }
+            total += low;
+            continue;
+        }
+        
+        if (/[0-9]/.test(ch)) {
+            total += parseInt(ch, 10);
+        } else {
+            total += ch.charCodeAt(0) % alphabetSize;
+        }
+    }
+    
+    const coprimes = getCoprimes(alphabetSize);
+    if (coprimes.length === 0) return { a: 1, b: total % alphabetSize };
+    
+    const a = coprimes[firstLetterValue % coprimes.length];
+    const b = total % alphabetSize;
+    
+    return { a, b };
+}
+
+function encode(text, password) {
+    const mapping = buildLanguageMapping(currentLang);
+    const alphabetArr = mapping.alphabet;
+    const alphabetSize = alphabetArr.length;
+    const { a, b } = calculateAB(password, alphabetSize);
+    
+    let result = '';
+    const symbolMap = mapping.symbolMap;
+    
+    for (const ch of text) {
+        let index = alphabetArr.indexOf(ch);
+        if (index === -1) {
+            const up = alphabetArr.indexOf(ch.toUpperCase());
+            const low = alphabetArr.indexOf(ch.toLowerCase());
+            index = (up !== -1 ? up : (low !== -1 ? low : -1));
+        }
+        
+        if (index !== -1) {
+            const x = index;
+            const y = (a * x + b) % alphabetSize;
+            const codedLetter = alphabetArr[y];
+            const sym = symbolMap[codedLetter];
+            result += (sym !== undefined && sym !== null) ? sym : codedLetter;
+        } else {
+            result += ch;
+        }
+    }
+    
+    return result;
+}
+
+function decode(text, password) {
+    const mapping = buildLanguageMapping(currentLang);
+    const alphabetArr = mapping.alphabet;
+    const alphabetSize = alphabetArr.length;
+    const { a, b } = calculateAB(password, alphabetSize);
+    const aInv = modInverse(a, alphabetSize);
+    
+    const reverseSymbolMap = {};
+    for (const [k, v] of Object.entries(mapping.symbolMap)) {
+        reverseSymbolMap[v] = k;
+    }
+    
+    let result = '';
+    for (const ch of text) {
+        if (reverseSymbolMap[ch]) {
+            const codedLetter = reverseSymbolMap[ch];
+            const y = alphabetArr.indexOf(codedLetter);
+            if (y !== -1) {
+                let x = (aInv * (y - b)) % alphabetSize;
+                if (x < 0) x += alphabetSize;
+                result += alphabetArr[x];
+            } else {
+                result += ch;
+            }
+        } else {
+            result += ch;
+        }
+    }
+    
+    return result;
+}
+
+function applyTranslations(lang) {
     currentLang = lang;
     const t = translations[lang] || translations['en'];
+    
+    // Update app title
+    document.getElementById('appTitle').textContent = t.appTitle;
     
     // Update modal content
     document.getElementById('modalTitle').textContent = t.modalTitle;
@@ -497,13 +799,13 @@ function applyTranslations(lang){
     document.getElementById('passwordHint').textContent = t.passwordHint;
 }
 
-function populateLanguageSelectors(){
+function populateLanguageSelectors() {
     const headerSel = document.getElementById('langSelect');
     const modalSel = document.getElementById('modalLangSelect');
     headerSel.innerHTML = '';
     modalSel.innerHTML = '';
     
-    for(const item of googleTranslateLanguages){
+    for (const item of googleTranslateLanguages) {
         const opt1 = document.createElement('option');
         opt1.value = item.code;
         opt1.textContent = item.name;
@@ -515,34 +817,34 @@ function populateLanguageSelectors(){
         modalSel.appendChild(opt2);
     }
     
-    if([...headerSel.options].some(o => o.value === currentLang) === false) currentLang = 'fr';
+    if ([...headerSel.options].some(o => o.value === currentLang) === false) currentLang = 'fr';
     headerSel.value = currentLang;
     modalSel.value = currentLang;
     
-    headerSel.addEventListener('change', function(){
+    headerSel.addEventListener('change', function() {
         const lang = this.value;
         modalSel.value = lang;
         applyTranslations(lang);
     });
     
-    modalSel.addEventListener('change', function(){
+    modalSel.addEventListener('change', function() {
         const lang = this.value;
         headerSel.value = lang;
         applyTranslations(lang);
     });
 }
 
-function checkPasswordStrength(password){
+function checkPasswordStrength(password) {
     let strength = 0;
-    if(password.length > 0) strength += 20;
-    if(password.length > 5) strength += 20;
-    if(/[a-zA-Z]/.test(password)) strength += 20;
-    if(/[0-9]/.test(password)) strength += 20;
-    if(/[^a-zA-Z0-9]/.test(password)) strength += 20;
+    if (password.length > 0) strength += 20;
+    if (password.length > 5) strength += 20;
+    if (/[a-zA-Z]/.test(password)) strength += 20;
+    if (/[0-9]/.test(password)) strength += 20;
+    if (/[^a-zA-Z0-9]/.test(password)) strength += 20;
     document.getElementById('passwordStrength').style.width = strength + '%';
 }
 
-function showStatus(message, type){
+function showStatus(message, type) {
     const statusEl = document.getElementById('status');
     statusEl.textContent = message;
     statusEl.className = 'status ' + type;
@@ -552,10 +854,10 @@ function showStatus(message, type){
     }, 3000);
 }
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function() {
     populateLanguageSelectors();
     
-    if(localStorage.getItem('hidePrompt') !== 'true'){
+    if (localStorage.getItem('hidePrompt') !== 'true') {
         document.getElementById('instructionModal').style.display = 'flex';
     }
     
@@ -563,24 +865,24 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('message').value = '';
     document.getElementById('result').innerText = '';
     
-    document.getElementById('password').addEventListener('input', function(){
+    document.getElementById('password').addEventListener('input', function() {
         checkPasswordStrength(this.value);
     });
     
     applyTranslations(currentLang);
     
-    document.getElementById('modalOk').addEventListener('click', function(){
-        if(document.getElementById('dontShowAgain').checked){
+    document.getElementById('modalOk').addEventListener('click', function() {
+        if (document.getElementById('dontShowAgain').checked) {
             localStorage.setItem('hidePrompt', 'true');
         }
         document.getElementById('instructionModal').style.display = 'none';
     });
     
-    document.getElementById('continueBtn').addEventListener('click', function(){
+    document.getElementById('continueBtn').addEventListener('click', function() {
         const password = document.getElementById('password').value;
         const t = translations[currentLang] || translations['en'];
         
-        if(!password){
+        if (!password) {
             showStatus(t.statusPasswordRequired, 'error');
             return;
         }
@@ -591,7 +893,7 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('message').focus();
     });
     
-    document.getElementById('backBtn').addEventListener('click', function(){
+    document.getElementById('backBtn').addEventListener('click', function() {
         document.getElementById('page2').classList.add('hidden');
         document.getElementById('page1').classList.remove('hidden');
         document.getElementById('password').value = '';
@@ -602,11 +904,11 @@ document.addEventListener('DOMContentLoaded', function(){
         currentPassword = '';
     });
     
-    document.getElementById('copyBtn').addEventListener('click', function(){
+    document.getElementById('copyBtn').addEventListener('click', function() {
         const result = document.getElementById('result').innerText;
         const t = translations[currentLang] || translations['en'];
         
-        if(!result) return;
+        if (!result) return;
         
         const textArea = document.createElement('textarea');
         textArea.value = result;
@@ -615,7 +917,7 @@ document.addEventListener('DOMContentLoaded', function(){
         
         try {
             const successful = document.execCommand('copy');
-            if(successful) showStatus(t.statusCopied, 'success');
+            if (successful) showStatus(t.statusCopied, 'success');
             else showStatus(t.statusCopied, 'error');
         } catch(err) {
             showStatus(t.statusCopied + ' ' + err, 'error');
@@ -624,11 +926,11 @@ document.addEventListener('DOMContentLoaded', function(){
         document.body.removeChild(textArea);
     });
     
-    document.getElementById('encodeBtn').addEventListener('click', function(){
+    document.getElementById('encodeBtn').addEventListener('click', function() {
         const message = document.getElementById('message').value;
         const t = translations[currentLang] || translations['en'];
         
-        if(!message){
+        if (!message) {
             showStatus(t.statusMessageRequired, 'error');
             return;
         }
@@ -642,11 +944,11 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     });
     
-    document.getElementById('decodeBtn').addEventListener('click', function(){
+    document.getElementById('decodeBtn').addEventListener('click', function() {
         const message = document.getElementById('message').value;
         const t = translations[currentLang] || translations['en'];
         
-        if(!message){
+        if (!message) {
             showStatus(t.statusMessageRequired, 'error');
             return;
         }

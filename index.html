@@ -86,7 +86,7 @@ input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(
 <div class="password-strength">
 <div class="password-strength-fill" id="passwordStrength"></div>
 </div>
-<div id="passwordHint" style="margin-top:10px;font-size:0.9rem;color:#a0a0ff;">Utilisez un mot de passe avec des lettres pour une sécurité optimale</div>
+<div id="passwordHint" style="margin-top:10px;font-size:0.9rem;color:#a0a0ff;">Utilisez un mot de passe avec des lettres et chiffres pour une sécurité optimale</div>
 </div>
 <button id="continueBtn" class="btn btn-block">Continuer vers le cryptage</button>
 </div>
@@ -480,7 +480,7 @@ const languageDataBase = {
     "symbolMap": {
       "A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|",
       "À":"α","Â":"β","Ä":"γ","Ç":"δ","É":"ε","È":"ζ","Ê":"η","Ë":"θ","Î":"ι","Ï":"κ","Ô":"λ","Ö":"μ","Ù":"ν","Û":"ξ","Ü":"ο","Ÿ":"π","Æ":"ρ","Œ":"σ",
-      "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
+      "0":"⓪","1":"❶","2":"❷","3":"❸","4":"❹","5":"❺","6":"❻","7":"❼","8":"❽","9":"❾"
     }
   },
   "es": {
@@ -508,10 +508,10 @@ const languageDataBase = {
     }
   },
   "pt": {
-    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZÇÁÀÂÃÉÊÍÓÔÕÚ0123456789",
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZÇÁÀÂãÉÊÍÓÔÕÚ0123456789",
     "symbolMap": {
       "A":"+","B":"#","C":"°","D":"√","E":"\\","F":"™","G":"]","H":"÷","I":"π","J":"{","K":"&","L":"^","M":"§","N":"¥","O":"∆","P":"£","Q":"¢","R":"%","S":"~","T":"©","U":"-","V":"•","W":"€","X":"®","Y":"✓","Z":"|",
-      "Ç":"α","Á":"β","À":"γ","Â":"δ","Ã":"ε","É":"ζ","Ê":"η","Í":"θ","Ó":"ι","Ô":"κ","Õ":"λ","Ú":"μ",
+      "Ç":"α","Á":"β","À":"γ","Â":"δ","ã":"ε","É":"ζ","Ê":"η","Í":"θ","Ó":"ι","Ô":"κ","Õ":"λ","Ú":"μ",
       "0":"①","1":"②","2":"③","3":"④","4":"⑤","5":"⑥","6":"⑦","7":"⑧","8":"⑨","9":"⑩"
     }
   },
@@ -582,7 +582,11 @@ function expandLanguageData() {
         
         const upper = Array.from(data.alphabet);
         let lower = upper.map(ch => {
-            try { return ch.toLowerCase(); } 
+            try { 
+                // Don't lowercase numbers
+                if (/[0-9]/.test(ch)) return ch;
+                return ch.toLowerCase(); 
+            } 
             catch(e) { return ch; }
         });
         
@@ -596,6 +600,9 @@ function expandLanguageData() {
         for (let i = 0; i < lower.length; i++) {
             const low = lower[i];
             if (data.symbolMap[low]) continue;
+            
+            // Don't create new symbols for numbers
+            if (/[0-9]/.test(low)) continue;
             
             const up = upper[i % upper.length];
             let candidate = lowerSymbols[i % lowerSymbols.length];
@@ -640,8 +647,10 @@ function buildLanguageMapping(code) {
             symbolMap[ch] = languageDataBase[code].symbolMap[ch];
             continue;
         }
-        // Fallback symbol generation
-        symbolMap[ch] = generateSymbolForIndex(i);
+        // Fallback symbol generation - but don't override numbers
+        if (!/[0-9]/.test(ch)) {
+            symbolMap[ch] = generateSymbolForIndex(i);
+        }
     }
     
     return { alphabet: alphabetArr, symbolMap };
@@ -662,6 +671,18 @@ function calculateAB(password, alphabetSize) {
     const alphabetArr = dynamicAlphabetForLanguage(currentLang);
     
     for (const ch of password) {
+        // First, check if it's a number character
+        if (/[0-9]/.test(ch)) {
+            const numValue = parseInt(ch, 10);
+            total += numValue;
+            // For numbers, we still need to set firstLetterValue if no letters found yet
+            if (!hasLetters) {
+                firstLetterValue = numValue % alphabetSize;
+            }
+            continue;
+        }
+        
+        // Then check for letters in the alphabet
         let idx = alphabetArr.indexOf(ch);
         if (idx !== -1) {
             if (!hasLetters) {
@@ -672,6 +693,7 @@ function calculateAB(password, alphabetSize) {
             continue;
         }
         
+        // Try uppercase/lowercase for letters only
         const up = alphabetArr.indexOf(ch.toUpperCase());
         const low = alphabetArr.indexOf(ch.toLowerCase());
         
@@ -693,17 +715,16 @@ function calculateAB(password, alphabetSize) {
             continue;
         }
         
-        if (/[0-9]/.test(ch)) {
-            total += parseInt(ch, 10);
-        } else {
-            total += ch.charCodeAt(0) % alphabetSize;
-        }
+        // Handle other characters
+        total += ch.charCodeAt(0) % alphabetSize;
     }
     
     const coprimes = getCoprimes(alphabetSize);
     if (coprimes.length === 0) return { a: 1, b: total % alphabetSize };
     
-    const a = coprimes[firstLetterValue % coprimes.length];
+    // Ensure firstLetterValue is within bounds
+    firstLetterValue = firstLetterValue % coprimes.length;
+    const a = coprimes[firstLetterValue];
     const b = total % alphabetSize;
     
     return { a, b };
@@ -721,9 +742,12 @@ function encode(text, password) {
     for (const ch of text) {
         let index = alphabetArr.indexOf(ch);
         if (index === -1) {
-            const up = alphabetArr.indexOf(ch.toUpperCase());
-            const low = alphabetArr.indexOf(ch.toLowerCase());
-            index = (up !== -1 ? up : (low !== -1 ? low : -1));
+            // For letters, try case variations
+            if (!/[0-9]/.test(ch)) {
+                const up = alphabetArr.indexOf(ch.toUpperCase());
+                const low = alphabetArr.indexOf(ch.toLowerCase());
+                index = (up !== -1 ? up : (low !== -1 ? low : -1));
+            }
         }
         
         if (index !== -1) {
@@ -747,26 +771,53 @@ function decode(text, password) {
     const { a, b } = calculateAB(password, alphabetSize);
     const aInv = modInverse(a, alphabetSize);
     
+    // Build a more robust reverse symbol map
     const reverseSymbolMap = {};
     for (const [k, v] of Object.entries(mapping.symbolMap)) {
+        // Ensure numbers get their correct reverse mapping
         reverseSymbolMap[v] = k;
     }
     
     let result = '';
-    for (const ch of text) {
+    let i = 0;
+    while (i < text.length) {
+        const ch = text[i];
+        let decodedChar = ch;
+        let found = false;
+        
+        // Check single character symbols first
         if (reverseSymbolMap[ch]) {
             const codedLetter = reverseSymbolMap[ch];
             const y = alphabetArr.indexOf(codedLetter);
             if (y !== -1) {
                 let x = (aInv * (y - b)) % alphabetSize;
                 if (x < 0) x += alphabetSize;
-                result += alphabetArr[x];
-            } else {
-                result += ch;
+                decodedChar = alphabetArr[x];
+                found = true;
             }
-        } else {
-            result += ch;
         }
+        
+        // If not found, check multi-character symbols
+        if (!found) {
+            for (let len = 2; len <= 4 && i + len <= text.length; len++) {
+                const multiChar = text.substring(i, i + len);
+                if (reverseSymbolMap[multiChar]) {
+                    const codedLetter = reverseSymbolMap[multiChar];
+                    const y = alphabetArr.indexOf(codedLetter);
+                    if (y !== -1) {
+                        let x = (aInv * (y - b)) % alphabetSize;
+                        if (x < 0) x += alphabetSize;
+                        decodedChar = alphabetArr[x];
+                        found = true;
+                        i += (len - 1); // Skip the extra characters we consumed
+                        break;
+                    }
+                }
+            }
+        }
+        
+        result += decodedChar;
+        i++;
     }
     
     return result;

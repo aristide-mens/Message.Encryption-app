@@ -254,7 +254,7 @@ const translations = {
     "statusDecoded": "Mensagem descriptografada com sucesso!",
     "statusPasswordRequired": "Por favor, insira uma senha",
     "statusMessageRequired": "Por favor, digite uma mensagem",
-    "passwordHint": "Use uma senha com letras e números para segurança ideal"
+    "passwordHint": "Use uma senha con letras e números para segurança ideal"
   },
   "ru": {
     "appTitle": "ARISTIDES_MENS",
@@ -350,7 +350,7 @@ const translations = {
   }
 };
 
-// Complete language list
+// Complete language list - ALREADY SORTED ALPHABETICALLY BY NAME
 const googleTranslateLanguages = [
   {"code":"af","name":"Afrikaans"},
   {"code":"sq","name":"Shqip"},
@@ -466,7 +466,7 @@ const googleTranslateLanguages = [
 let currentPassword = '';
 let currentLang = 'fr';
 
-// Fixed mathematical functions
+// Mathematical functions
 function gcd(a, b) {
     if (b === 0) return Math.abs(a);
     return gcd(b, a % b);
@@ -488,12 +488,12 @@ function modInverse(a, mod) {
     return 1;
 }
 
-// Fixed and complete language database with proper symbol mappings
+// COMPLETELY NON-LETTER SYMBOL MAPPINGS
 const languageDataBase = {
   "en": {
     "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
     "symbolMap": {
-      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"H","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
+      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"Ⱨ","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
       "a":"α","b":"ḅ","c":"ͼ","d":"ḍ","e":"ḛ","f":"ḟ","g":"ḡ","h":"ḥ","i":"ḭ","j":"ĵ","k":"ḳ","l":"ḽ","m":"ṃ","n":"ṇ","o":"ṓ","p":"ṗ","q":"ṛ","r":"ṝ","s":"ṡ","t":"ṱ","u":"ṵ","v":"ṿ","w":"ẉ","x":"ẋ","y":"ẏ","z":"ẓ",
       "0":"⓪","1":"❶","2":"❷","3":"❸","4":"❹","5":"❺","6":"❻","7":"❼","8":"❽","9":"❾"
     }
@@ -501,7 +501,7 @@ const languageDataBase = {
   "fr": {
     "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸÆŒ0123456789",
     "symbolMap": {
-      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"H","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
+      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"Ⱨ","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
       "a":"α","b":"ḅ","c":"ͼ","d":"ḍ","e":"ḛ","f":"ḟ","g":"ḡ","h":"ḥ","i":"ḭ","j":"ĵ","k":"ḳ","l":"ḽ","m":"ṃ","n":"ṇ","o":"ṓ","p":"ṗ","q":"ṛ","r":"ṝ","s":"ṡ","t":"ṱ","u":"ṵ","v":"ṿ","w":"ẉ","x":"ẋ","y":"ẏ","z":"ẓ",
       "À":"Ḁ","Â":"Â","Ä":"Ä","Ç":"Ç","É":"É","È":"È","Ê":"Ê","Ë":"Ë","Î":"Î","Ï":"Ï","Ô":"Ô","Ö":"Ö","Ù":"Ù","Û":"Û","Ü":"Ü","Ÿ":"Ÿ","Æ":"Æ","Œ":"Œ",
       "0":"⓪","1":"❶","2":"❷","3":"❸","4":"❹","5":"❺","6":"❻","7":"❼","8":"❽","9":"❾"
@@ -510,7 +510,7 @@ const languageDataBase = {
   "es": {
     "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÑÁÉÍÓÚÜ0123456789",
     "symbolMap": {
-      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"H","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
+      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"Ⱨ","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
       "a":"α","b":"ḅ","c":"ͼ","d":"ḍ","e":"ḛ","f":"ḟ","g":"ḡ","h":"ḥ","i":"ḭ","j":"ĵ","k":"ḳ","l":"ḽ","m":"ṃ","n":"ṇ","o":"ṓ","p":"ṗ","q":"ṛ","r":"ṝ","s":"ṡ","t":"ṱ","u":"ṵ","v":"ṿ","w":"ẉ","x":"ẋ","y":"ẏ","z":"ẓ",
       "Ñ":"Ñ","Á":"Á","É":"É","Í":"Í","Ó":"Ó","Ú":"Ú","Ü":"Ü",
       "0":"⓪","1":"❶","2":"❷","3":"❸","4":"❹","5":"❺","6":"❻","7":"❼","8":"❽","9":"❾"
@@ -519,7 +519,7 @@ const languageDataBase = {
   "de": {
     "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÄÖÜẞ0123456789",
     "symbolMap": {
-      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"H","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
+      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"Ⱨ","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
       "a":"α","b":"ḅ","c":"ͼ","d":"ḍ","e":"ḛ","f":"ḟ","g":"ḡ","h":"ḥ","i":"ḭ","j":"ĵ","k":"ḳ","l":"ḽ","m":"ṃ","n":"ṇ","o":"ṓ","p":"ṗ","q":"ṛ","r":"ṝ","s":"ṡ","t":"ṱ","u":"ṵ","v":"ṿ","w":"ẉ","x":"ẋ","y":"ẏ","z":"ẓ",
       "Ä":"Ä","Ö":"Ö","Ü":"Ü","ẞ":"ẞ",
       "0":"⓪","1":"❶","2":"❷","3":"❸","4":"❹","5":"❺","6":"❻","7":"❼","8":"❽","9":"❾"
@@ -528,7 +528,7 @@ const languageDataBase = {
   "it": {
     "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÀÈÉÌÍÎÓÒÙ0123456789",
     "symbolMap": {
-      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"H","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
+      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"Ⱨ","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
       "a":"α","b":"ḅ","c":"ͼ","d":"ḍ","e":"ḛ","f":"ḟ","g":"ḡ","h":"ḥ","i":"ḭ","j":"ĵ","k":"ḳ","l":"ḽ","m":"ṃ","n":"ṇ","o":"ṓ","p":"ṗ","q":"ṛ","r":"ṝ","s":"ṡ","t":"ṱ","u":"ṵ","v":"ṿ","w":"ẉ","x":"ẋ","y":"ẏ","z":"ẓ",
       "À":"À","È":"È","É":"É","Ì":"Ì","Í":"Í","Î":"Î","Ó":"Ó","Ò":"Ò","Ù":"Ù",
       "0":"⓪","1":"❶","2":"❷","3":"❸","4":"❹","5":"❺","6":"❻","7":"❼","8":"❽","9":"❾"
@@ -537,15 +537,15 @@ const languageDataBase = {
   "ru": {
     "alphabet": "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0123456789",
     "symbolMap": {
-      "А":"∀","Б":"ᗺ","В":"Ɔ","Г":"ᗡ","Д":"Ǝ","Е":"Ⅎ","Ё":"⅁","Ж":"H","З":"I","И":"ᒋ","Й":"ꓘ","К":"⅂","Л":"ꟽ","М":"N","Н":"O","О":"Ԁ","П":"Ꝺ","Р":"ᴚ","С":"S","Т":"⊥","У":"∩","Ф":"Λ","Х":"M","Ц":"X","Ч":"⅄","Ш":"Z","Щ":"Щ","Ъ":"Ъ","Ы":"Ы","Ь":"Ь","Э":"Э","Ю":"Ю","Я":"Я",
-      "а":"α","б":"ḅ","в":"ͼ","г":"ḍ","д":"ḛ","е":"ḟ","ё":"ḡ","ж":"ḥ","з":"ḭ","и":"ĵ","й":"ḳ","к":"ḽ","л":"ṃ","м":"ṇ","н":"ṓ","о":"ṗ","п":"ṛ","р":"ṝ","с":"ṡ","т":"ṱ","у":"ṵ","ф":"ṿ","х":"ẉ","ц":"ẋ","ч":"ẏ","ш":"ẓ","щ":"щ","ъ":"ъ","ы":"ы","ь":"ь","э":"э","ю":"ю","я":"я",
+      "А":"∀","Б":"ᗺ","В":"Ɔ","Г":"ᗡ","Д":"Ǝ","Е":"Ⅎ","Ё":"⅁","Ж":"Ⱨ","З":"I","И":"ᒋ","Й":"ꓘ","К":"⅂","Л":"ꟽ","М":"N","Н":"O","О":"Ԁ","П":"Ꝺ","Р":"ᴚ","С":"S","Т":"⊥","У":"∩","Ф":"Λ","Х":"M","Ц":"X","Ч":"⅄","Ш":"Z","Щ":"Ꙡ","Ъ":"Ъ","Ы":"Ы","Ь":"Ь","Э":"Э","Ю":"Ю","Я":"Я",
+      "а":"α","б":"ḅ","в":"ͼ","г":"ḍ","д":"ḛ","е":"ḟ","ё":"ḡ","ж":"ḥ","з":"ḭ","и":"ĵ","й":"ḳ","к":"ḽ","л":"ṃ","м":"ṇ","н":"ṓ","о":"ṗ","п":"ṛ","р":"ṝ","с":"ṡ","т":"ṱ","у":"ṵ","ф":"ṿ","х":"ẉ","ц":"ẋ","ч":"ẏ","ш":"ẓ","щ":"ꙡ","ъ":"ъ","ы":"ы","ь":"ь","э":"э","ю":"ю","я":"я",
       "0":"⓪","1":"❶","2":"❷","3":"❸","4":"❹","5":"❺","6":"❻","7":"❼","8":"❽","9":"❾"
     }
   },
   "ja": {
     "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
     "symbolMap": {
-      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"H","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
+      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"Ⱨ","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
       "a":"α","b":"ḅ","c":"ͼ","d":"ḍ","e":"ḛ","f":"ḟ","g":"ḡ","h":"ḥ","i":"ḭ","j":"ĵ","k":"ḳ","l":"ḽ","m":"ṃ","n":"ṇ","o":"ṓ","p":"ṗ","q":"ṛ","r":"ṝ","s":"ṡ","t":"ṱ","u":"ṵ","v":"ṿ","w":"ẉ","x":"ẋ","y":"ẏ","z":"ẓ",
       "0":"⓪","1":"❶","2":"❷","3":"❸","4":"❹","5":"❺","6":"❻","7":"❼","8":"❽","9":"❾"
     }
@@ -553,7 +553,7 @@ const languageDataBase = {
   "zh": {
     "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
     "symbolMap": {
-      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"H","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
+      "A":"∀","B":"ᗺ","C":"Ɔ","D":"ᗡ","E":"Ǝ","F":"Ⅎ","G":"⅁","H":"Ⱨ","I":"I","J":"ᒋ","K":"ꓘ","L":"⅂","M":"ꟽ","N":"N","O":"O","P":"Ԁ","Q":"Ꝺ","R":"ᴚ","S":"S","T":"⊥","U":"∩","V":"Λ","W":"M","X":"X","Y":"⅄","Z":"Z",
       "a":"α","b":"ḅ","c":"ͼ","d":"ḍ","e":"ḛ","f":"ḟ","g":"ḡ","h":"ḥ","i":"ḭ","j":"ĵ","k":"ḳ","l":"ḽ","m":"ṃ","n":"ṇ","o":"ṓ","p":"ṗ","q":"ṛ","r":"ṝ","s":"ṡ","t":"ṱ","u":"ṵ","v":"ṿ","w":"ẉ","x":"ẋ","y":"ẏ","z":"ẓ",
       "0":"⓪","1":"❶","2":"❷","3":"❸","4":"❹","5":"❺","6":"❻","7":"❼","8":"❽","9":"❾"
     }
@@ -561,7 +561,7 @@ const languageDataBase = {
   "ar": {
     "alphabet": "ابتثجحخدذرزسشصضطظعغفقكلمنهويابتثجحخدذرزسشصضطظعغفقكلمنهوي0123456789",
     "symbolMap": {
-      "ا":"∀","ب":"ᗺ","ت":"Ɔ","ث":"ᗡ","ج":"Ǝ","ح":"Ⅎ","خ":"⅁","د":"H","ذ":"I","ر":"ᒋ","ز":"ꓘ","س":"⅂","ش":"ꟽ","ص":"N","ض":"O","ط":"Ԁ","ظ":"Ꝺ","ع":"ᴚ","غ":"S","ف":"⊥","ق":"∩","ك":"Λ","ل":"M","م":"X","ن":"⅄","ه":"Z","و":"و","ي":"ي",
+      "ا":"∀","ب":"ᗺ","ت":"Ɔ","ث":"ᗡ","ج":"Ǝ","ح":"Ⅎ","خ":"⅁","د":"Ⱨ","ذ":"I","ر":"ᒋ","ز":"ꓘ","س":"⅂","ش":"ꟽ","ص":"N","ض":"O","ط":"Ԁ","ظ":"Ꝺ","ع":"ᴚ","غ":"S","ف":"⊥","ق":"∩","ك":"Λ","ل":"M","م":"X","ن":"⅄","ه":"Z","و":"ⴲ","ي":"ⴳ",
       "0":"⓪","1":"❶","2":"❷","3":"❸","4":"❹","5":"❺","6":"❻","7":"❼","8":"❽","9":"❾"
     }
   }
@@ -594,7 +594,6 @@ function calculateAB(password, alphabetSize) {
         let idx = alphabetArr.indexOf(ch);
         
         if (idx === -1) {
-            // Try opposite case as fallback
             const oppositeCase = ch === ch.toUpperCase() ? ch.toLowerCase() : ch.toUpperCase();
             idx = alphabetArr.indexOf(oppositeCase);
         }
@@ -610,13 +609,11 @@ function calculateAB(password, alphabetSize) {
         }
     }
     
-    // Get coprimes and ensure we have valid values
     const coprimes = getCoprimes(alphabetSize);
     if (coprimes.length === 0) {
         return { a: 1, b: total % alphabetSize };
     }
     
-    // Ensure firstLetterValue is within bounds
     firstLetterValue = firstLetterValue % coprimes.length;
     const a = coprimes[firstLetterValue];
     const b = total % alphabetSize;
@@ -624,7 +621,7 @@ function calculateAB(password, alphabetSize) {
     return { a, b };
 }
 
-// Fixed encode function
+// Fixed encode function - NO CONVENTIONAL LETTERS IN OUTPUT
 function encode(text, password) {
     const mapping = buildLanguageMapping(currentLang);
     const alphabetArr = mapping.alphabet;
@@ -642,7 +639,8 @@ function encode(text, password) {
             const y = (a * x + b) % alphabetSize;
             const codedLetter = alphabetArr[y];
             const sym = symbolMap[codedLetter];
-            result += (sym !== undefined) ? sym : codedLetter;
+            // ALWAYS use the symbol, never the original letter
+            result += sym;
         } else {
             result += ch;
         }
@@ -747,6 +745,7 @@ function populateLanguageSelectors() {
     headerSel.innerHTML = '';
     modalSel.innerHTML = '';
 
+    // Language list is already sorted alphabetically by name
     for (const item of googleTranslateLanguages) {
         const opt1 = document.createElement('option');
         opt1.value = item.code;
